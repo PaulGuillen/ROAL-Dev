@@ -287,7 +287,6 @@ class CreateWorkerActivity : AppCompatActivity() {
             expectedResult(result)
         }
 
-    //test
     private fun expectedResult(result: ActivityResult) {
         val resultCode = result.resultCode
         val data = result.data
@@ -315,7 +314,7 @@ class CreateWorkerActivity : AppCompatActivity() {
             val bytes = contentResolver.openInputStream(uri)?.readBytes()
             Base64.encodeToString(bytes, Base64.DEFAULT)
         } catch (error: IOException) {
-            error.printStackTrace() // This exception always occurs
+            error.printStackTrace()
             "Ha ocurrido un error"
         }
     }
