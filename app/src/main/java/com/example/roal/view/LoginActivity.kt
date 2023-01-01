@@ -104,5 +104,4 @@ class LoginActivity : AppCompatActivity() {
         startActivity(i)
     }
 
-
 }

@@ -28,14 +28,6 @@ class WelcomeActivity : AppCompatActivity() {
         startActivity(i)
     }
 
-//
-//    private fun getUserFromSession() {
-//        val sharedPref = SharedPref(this)
-//        if (!sharedPref.getData("user").isNullOrBlank()) {
-//            goToHomeDashboard()
-//        }
-//    }
-
     private fun goToHomeDashboard() {
         val i = Intent(this, HomeActivity::class.java)
         i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

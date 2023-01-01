@@ -104,5 +104,4 @@ class ForgotPasswordActivity : AppCompatActivity() {
         onBackPressedDispatcher.onBackPressed()
         backView()
     }
-
 }

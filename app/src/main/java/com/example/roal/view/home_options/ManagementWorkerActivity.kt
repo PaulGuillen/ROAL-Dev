@@ -98,10 +98,12 @@ class ManagementWorkerActivity : AppCompatActivity() {
                     textPhoto.let {
                         Glide.with(this@ManagementWorkerActivity)
                             .load(textPhoto)
-                            .apply(centerCropTransform()
-                                .placeholder(R.drawable.ic_baseline_supervised_user_circle_24)
-                                .error(R.drawable.ic_baseline_supervised_user_circle_24)
-                                .priority(Priority.HIGH))
+                            .apply(
+                                centerCropTransform()
+                                    .placeholder(R.drawable.ic_baseline_supervised_user_circle_24)
+                                    .error(R.drawable.ic_baseline_supervised_user_circle_24)
+                                    .priority(Priority.HIGH)
+                            )
                             .into(binding.imageWorker)
                     }
 
@@ -122,7 +124,6 @@ class ManagementWorkerActivity : AppCompatActivity() {
                 hideLoading()
                 Toast.makeText(this@ManagementWorkerActivity, "Error: ${t.message}", Toast.LENGTH_LONG).show()
             }
-
         })
     }
 

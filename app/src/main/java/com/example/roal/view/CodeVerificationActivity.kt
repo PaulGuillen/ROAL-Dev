@@ -176,5 +176,4 @@ class CodeVerificationActivity : AppCompatActivity() {
         countDownTimer?.cancel()
         startActivity(i)
     }
-
 }
