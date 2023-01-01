@@ -34,7 +34,6 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-
 @SuppressLint("SourceLockedOrientationActivity")
 class CreateWorkerActivity : AppCompatActivity() {
 

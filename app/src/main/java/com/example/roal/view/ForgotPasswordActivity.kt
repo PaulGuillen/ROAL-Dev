@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.View
 import android.widget.Toast
 import com.example.roal.databinding.ActivityForgotPasswordBinding
 import com.example.roal.models.MainUser
