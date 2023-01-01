@@ -64,4 +64,5 @@
     <string name="subtitle_missing_parameters">Revise los campos obligatorios</string>
     <string name="title_error_register">Datos no válidos</string>
     <string name="subtitle_error_register">Problema con el registro del trabajdor, comunicarse con soporte</string>
+    <string name="registrar_trabajador">Registrar trabajador</string>
 </resources>

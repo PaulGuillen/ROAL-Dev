@@ -323,7 +323,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             android:background="@drawable/rounded_button"
-            android:text="Registrar trabajador"
+            android:text="@string/registrar_trabajador"
             android:textAllCaps="false"
             android:textAppearance="@style/botonesGeneral"
             app:layout_constraintBottom_toTopOf="@+id/tvBottomFilter"
