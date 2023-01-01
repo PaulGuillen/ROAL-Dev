@@ -13,6 +13,7 @@ import com.example.roal.providers.UsersProvider
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import utils.ChargeDialog
 
 class NewPasswordActivity : AppCompatActivity() {
 
@@ -42,22 +43,34 @@ class NewPasswordActivity : AppCompatActivity() {
         )
 
         if (isValidForm(newPassword,confirmNewPassword)) {
-            binding.constraintGeneral.visibility = View.GONE
+            showLoading()
             usersProvider.resetPassword(mainUser)?.enqueue(object : Callback<ResponseHttp> {
                 override fun onResponse(call: Call<ResponseHttp>, response: Response<ResponseHttp>) {
                     if (response.body()?.code == 200) {
+                        hideLoading()
                         goToHomeDashboard()
                         Toast.makeText(this@NewPasswordActivity, response.body()?.message, Toast.LENGTH_LONG).show()
                     } else {
+                        hideLoading()
                         Toast.makeText(this@NewPasswordActivity, "Contraseña no permitida", Toast.LENGTH_LONG).show()
                     }
                 }
 
                 override fun onFailure(p0: Call<ResponseHttp>, t: Throwable) {
+                    hideLoading()
                     Toast.makeText(this@NewPasswordActivity, "Hubo un error ${t.message}", Toast.LENGTH_LONG).show()
                 }
             })
         }
+    }
+
+    private fun hideLoading() {
+        progressDialog?.let { if (it.isShowing) it.cancel() }
+    }
+
+    private fun showLoading() {
+        hideLoading()
+        progressDialog = ChargeDialog.showLoadingDialog(this)
     }
 
     private fun isValidForm(
@@ -95,4 +108,8 @@ class NewPasswordActivity : AppCompatActivity() {
         startActivity(i)
     }
 
+    override fun onBackPressed() {
+        onBackPressedDispatcher.onBackPressed()
+        backView()
+    }
 }

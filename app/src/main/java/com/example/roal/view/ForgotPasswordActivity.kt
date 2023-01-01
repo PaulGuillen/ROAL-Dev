@@ -14,6 +14,7 @@ import com.example.roal.providers.UsersProvider
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import utils.ChargeDialog
 
 class ForgotPasswordActivity : AppCompatActivity() {
 
@@ -39,23 +40,37 @@ class ForgotPasswordActivity : AppCompatActivity() {
         )
 
         if (isValidForm(email)) {
+            showLoading()
             usersProvider.recoveryPassword(mainUser)?.enqueue(object : Callback<ResponseHttp> {
                 override fun onResponse(call: Call<ResponseHttp>, response: Response<ResponseHttp>) {
                     if (response.body()?.code == 200) {
+                        hideLoading()
                         goToCodeVerification()
                         Toast.makeText(this@ForgotPasswordActivity, response.body()?.message, Toast.LENGTH_LONG).show()
                     } else {
+                        hideLoading()
                         Toast.makeText(this@ForgotPasswordActivity, "Los datos no son correctos", Toast.LENGTH_LONG).show()
                     }
                 }
 
                 override fun onFailure(p0: Call<ResponseHttp>, t: Throwable) {
+                    hideLoading()
                     Toast.makeText(this@ForgotPasswordActivity, "Hubo un error ${t.message}", Toast.LENGTH_LONG).show()
                 }
             })
         } else {
+            hideLoading()
             Toast.makeText(this@ForgotPasswordActivity, "Datos no validos", Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun hideLoading() {
+        progressDialog?.let { if (it.isShowing) it.cancel() }
+    }
+
+    private fun showLoading() {
+        hideLoading()
+        progressDialog = ChargeDialog.showLoadingDialog(this)
     }
 
     private fun String.isEmailValid(): Boolean {
@@ -83,6 +98,11 @@ class ForgotPasswordActivity : AppCompatActivity() {
         val i = Intent(this, LoginActivity::class.java)
         i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(i)
+    }
+
+    override fun onBackPressed() {
+        onBackPressedDispatcher.onBackPressed()
+        backView()
     }
 
 }

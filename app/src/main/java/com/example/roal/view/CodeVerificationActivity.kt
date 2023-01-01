@@ -15,13 +15,14 @@ import com.example.roal.providers.UsersProvider
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import utils.ChargeDialog
 
 class CodeVerificationActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityCodeVerificationBinding
     var usersProvider = UsersProvider()
     var countDownTimer: CountDownTimer? = null
-    var millisUntilFinished: Long? = null
+    var millisUntilFinished : Long? = null
     private var progressDialog: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +32,6 @@ class CodeVerificationActivity : AppCompatActivity() {
         binding.btnRecuperarContrasena.setOnClickListener { goToNewPassword() }
         binding.btnReenviarCorreo.setOnClickListener { sendingAgainEmail() }
         binding.btnBack.setOnClickListener { backView() }
-        millisUntilFinished = 60100
         timerToShowView()
     }
 
@@ -42,20 +42,23 @@ class CodeVerificationActivity : AppCompatActivity() {
             email = email,
             action = action
         )
-        binding.constraintGeneral.visibility = View.GONE
+        showLoading()
         usersProvider.recoveryPassword(mainUser)?.enqueue(object : Callback<ResponseHttp> {
             override fun onResponse(call: Call<ResponseHttp>, response: Response<ResponseHttp>) {
                 if (response.body()?.code == 200) {
+                    hideLoading()
                     binding.btnReenviarCorreo.visibility = View.GONE
                     binding.btnRecuperarContrasena.visibility = View.VISIBLE
                     timerToShowView()
                     Toast.makeText(this@CodeVerificationActivity, response.body()?.message, Toast.LENGTH_LONG).show()
                 } else {
+                    hideLoading()
                     Toast.makeText(this@CodeVerificationActivity, "Los datos no son correctos", Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(p0: Call<ResponseHttp>, t: Throwable) {
+                hideLoading()
                 Toast.makeText(this@CodeVerificationActivity, "Hubo un error ${t.message}", Toast.LENGTH_LONG).show()
             }
         })
@@ -76,19 +79,21 @@ class CodeVerificationActivity : AppCompatActivity() {
             email = email,
             action = action
         )
-
         if (isValidForm(numberOne, numberTwo, numberThree, numberFour, numberFive)) {
-            binding.constraintGeneral.visibility = View.GONE
+            showLoading()
             usersProvider.verificationCode(mainUser)?.enqueue(object : Callback<ResponseHttp> {
                 override fun onResponse(call: Call<ResponseHttp>, response: Response<ResponseHttp>) {
                     if (response.body()?.code == 200) {
+                        hideLoading()
                         goToNewPasswordView()
                         Toast.makeText(this@CodeVerificationActivity, response.body()?.message, Toast.LENGTH_LONG).show()
                     } else {
+                        hideLoading()
                         Toast.makeText(this@CodeVerificationActivity, "El código no es correcto", Toast.LENGTH_LONG).show()
                     }
                 }
                 override fun onFailure(p0: Call<ResponseHttp>, t: Throwable) {
+                    hideLoading()
                     Toast.makeText(this@CodeVerificationActivity, "Hubo un error ${t.message}", Toast.LENGTH_LONG).show()
                 }
             })
@@ -97,10 +102,20 @@ class CodeVerificationActivity : AppCompatActivity() {
         }
     }
 
+    private fun hideLoading() {
+        progressDialog?.let { if (it.isShowing) it.cancel() }
+    }
+
+    private fun showLoading() {
+        hideLoading()
+        progressDialog = ChargeDialog.showLoadingDialog(this)
+    }
+
     @SuppressLint("SetTextI18n")
     private fun timerToShowView(){
-        binding.textTimer.text = "" + (millisUntilFinished!! / 1000) + "s"
-        countDownTimer = object : CountDownTimer(millisUntilFinished!!, 1000) {
+        millisUntilFinished = 60000
+        binding.textTimer.text = "" + (millisUntilFinished?.div(1000)) + "s"
+        val countDownTimer = object : CountDownTimer(60000, 1000) {
             override fun onTick(time: Long) {
                 binding.textTimer.text  = "Tiempo restante : " + (time / 1000) + "s"
             }
@@ -108,7 +123,8 @@ class CodeVerificationActivity : AppCompatActivity() {
                 binding.btnReenviarCorreo.visibility = View.VISIBLE
                 binding.btnRecuperarContrasena.visibility = View.GONE
             }
-        }.start()
+        }
+        countDownTimer.start()
     }
 
     private fun isValidForm(
@@ -160,4 +176,5 @@ class CodeVerificationActivity : AppCompatActivity() {
         countDownTimer?.cancel()
         startActivity(i)
     }
+
 }

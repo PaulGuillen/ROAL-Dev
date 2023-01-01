@@ -51,12 +51,13 @@ class ManagementWorkerActivity : AppCompatActivity() {
 
     private fun deleteWorker() {
         SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-            .setTitleText("Eliminar datos")
-            .setContentText("Estas seguro de borrar esta información?")
+            .setTitleText(getString(R.string.title_delete_data))
+            .setContentText(getString(R.string.subtitle_delete_data))
             .setCancelText("No").setCancelClickListener { obj: SweetAlertDialog -> obj.dismiss() }
             .setConfirmText("Si")
             .setConfirmClickListener { sDialog: SweetAlertDialog ->
-                SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE).setTitleText("Información del trabajador borrado").show()
+                SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                    .setTitleText(getString(R.string.successful_delete_data)).show()
                 sDialog.dismiss()
             }.show()
     }

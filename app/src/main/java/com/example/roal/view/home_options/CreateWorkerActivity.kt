@@ -124,8 +124,8 @@ class CreateWorkerActivity : AppCompatActivity() {
         val phone = binding.textPhone.text.toString()
         val phone_emergency = binding.textPhoneEmergency.text.toString()
 
-        showLoading()
         if (isValidForm(dni, name, lastname, area, phone, phone_emergency)) {
+            showLoading()
             startImageForResult.let {
                 if (imageFile != null) {
                     val imageBase = imageFile?.toUri()?.let { it1 -> getBase64ForUriAndPossiblyCrash(it1) }
@@ -182,7 +182,6 @@ class CreateWorkerActivity : AppCompatActivity() {
                 }
             }
         } else {
-            hideLoading()
             SweetAlertDialog(this@CreateWorkerActivity, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText(getString(R.string.title_missing_parameters))
                 .setContentText(getString(R.string.subtitle_missing_parameters))

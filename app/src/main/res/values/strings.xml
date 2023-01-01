@@ -66,4 +66,7 @@
     <string name="subtitle_error_register">Problema con el registro del trabajdor, comunicarse con soporte</string>
     <string name="registrar_trabajador">Registrar trabajador</string>
     <string name="dni_del_trabajador">DNI del trabajador</string>
+    <string name="title_delete_data">Eliminar datos</string>
+    <string name="subtitle_delete_data">Estas seguro de borrar esta información?</string>
+    <string name="successful_delete_data">Información del trabajador borrado</string>
 </resources>

@@ -42,8 +42,8 @@ class LoginActivity : AppCompatActivity() {
             password = password,
             action = action
         )
-        showLoading()
         if (isValidForm(email, password)) {
+            showLoading()
             usersProvider.login(mainUser)?.enqueue(object : Callback<ResponseHttp> {
                 override fun onResponse(call: Call<ResponseHttp>, response: Response<ResponseHttp>) {
                     if (response.body()?.code == 200) {
@@ -62,7 +62,6 @@ class LoginActivity : AppCompatActivity() {
                 }
             })
         } else {
-            hideLoading()
             Toast.makeText(this@LoginActivity, "Datos no validos", Toast.LENGTH_LONG).show()
         }
     }
@@ -104,4 +103,6 @@ class LoginActivity : AppCompatActivity() {
         val i = Intent(this, ForgotPasswordActivity::class.java)
         startActivity(i)
     }
+
+
 }
