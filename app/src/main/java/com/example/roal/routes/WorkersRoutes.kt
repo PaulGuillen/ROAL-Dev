@@ -1,0 +1,26 @@
+package com.example.roal.routes
+
+import com.example.roal.models.ResponseHttp
+import com.example.roal.models.Workers
+import com.example.roal.models.WorkersResponse
+import com.google.gson.JsonObject
+import retrofit2.Call
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
+
+interface WorkersRoutes {
+
+    @GET("prod/get_worker/{dni}")
+    fun getWorkers(
+        @Query("dni") dni: String
+    ):  Call<WorkersResponse>
+
+    @POST("prod/register_worker")
+    fun creatingWorkers(
+        @Body workerUser: Workers
+    ):  Call<ResponseHttp>
+
+}
