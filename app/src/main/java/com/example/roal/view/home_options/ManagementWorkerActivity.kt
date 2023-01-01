@@ -2,19 +2,19 @@ package com.example.roal.view.home_options
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Base64
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
+import com.bumptech.glide.request.RequestOptions.centerCropTransform
 import com.example.roal.R
 import com.example.roal.databinding.ActivityManagementWorkerBinding
 import com.example.roal.models.WorkersResponse
@@ -23,6 +23,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import utils.ChargeDialog
+
 
 @SuppressLint("SourceLockedOrientationActivity")
 class ManagementWorkerActivity : AppCompatActivity() {
@@ -43,8 +44,21 @@ class ManagementWorkerActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.fabWorkerCreate.setOnClickListener { goToWorkerCreate() }
+        binding.btnDelete.setOnClickListener { deleteWorker() }
         //binding.btnBuscar.setOnClickListener { getWorkers() }
         searchWorkers()
+    }
+
+    private fun deleteWorker() {
+        SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+            .setTitleText("Eliminar datos")
+            .setContentText("Estas seguro de borrar esta información?")
+            .setCancelText("No").setCancelClickListener { obj: SweetAlertDialog -> obj.dismiss() }
+            .setConfirmText("Si")
+            .setConfirmClickListener { sDialog: SweetAlertDialog ->
+                SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE).setTitleText("Información del trabajador borrado").show()
+                sDialog.dismiss()
+            }.show()
     }
 
     private fun searchWorkers() {
@@ -82,7 +96,12 @@ class ManagementWorkerActivity : AppCompatActivity() {
                     val textPhoto = response.body()?.photo
                     textPhoto.let {
                         Glide.with(this@ManagementWorkerActivity)
-                            .load(textPhoto).into(binding.imageWorker)
+                            .load(textPhoto)
+                            .apply(centerCropTransform()
+                                .placeholder(R.drawable.ic_baseline_supervised_user_circle_24)
+                                .error(R.drawable.ic_baseline_supervised_user_circle_24)
+                                .priority(Priority.HIGH))
+                            .into(binding.imageWorker)
                     }
 
                     binding.textViewDNI.text = textIdentification

@@ -137,6 +137,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/mulish_bold"
+                            android:layout_marginStart="3dp"
                             android:textAlignment="textStart"
                             android:textSize="16sp"
                             tools:text="DNI del trabajador" />
@@ -164,6 +165,7 @@
                             android:layout_height="match_parent"
                             android:fontFamily="@font/mulish_bold"
                             android:textAlignment="textStart"
+                            android:layout_marginStart="3dp"
                             android:textSize="16sp"
                             tools:text="18-02-1998" />
 
@@ -191,6 +193,7 @@
                             android:fontFamily="@font/mulish_bold"
                             android:textAlignment="textStart"
                             android:textSize="16sp"
+                            android:layout_marginStart="3dp"
                             tools:text="18-02-1998" />
 
                     </LinearLayout>
@@ -217,6 +220,7 @@
                             android:fontFamily="@font/mulish_bold"
                             android:textAlignment="textStart"
                             android:textSize="16sp"
+                            android:layout_marginStart="3dp"
                             tools:text="987654321" />
 
                     </LinearLayout>
