@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -36,7 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mulish_bold"
-                    android:text="DNI:"
+                    android:text="@string/Dni"
                     android:textSize="14sp"/>
 
                 <TextView
@@ -45,8 +46,9 @@
                     android:fontFamily="@font/mulish_bold"
                     android:paddingStart="5dp"
                     android:layout_height="wrap_content"
-                    android:text="DNI del trabajador"
-                    android:textSize="14sp"/>
+                    android:text="@string/dni_del_trabajador"
+                    android:textSize="14sp"
+                    tools:ignore="RtlSymmetry" />
 
             </LinearLayout>
 
@@ -58,8 +60,10 @@
             android:layout_height="30dp"
             android:src="@drawable/ic_check"
             android:layout_marginLeft="20dp"
+            android:contentDescription="@string/todo"
             android:layout_gravity="center"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            tools:ignore="RtlHardcoded" />
 
     </LinearLayout>
 
