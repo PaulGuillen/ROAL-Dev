@@ -52,7 +52,6 @@
                 android:paddingBottom="30dp">
 
                 <TextView
-                    android:id="@+id/text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mulish_regular"
@@ -68,94 +67,20 @@
                     app:drawableStartCompat="@drawable/ic_baseline_hearing_24" />
 
 
-                <LinearLayout
-                    android:id="@+id/linearlayout_exclamacion"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text">
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="22dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="0.28"
-                        tools:ignore="ContentDescription" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:layout_weight="0.90"
-                        android:fontFamily="@font/mulish_regular"
-                        android:text="Card"
-                        android:textColor="@color/black"
-                        android:textSize="13sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearlayout_check_uno"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/linearlayout_exclamacion">
-
-                    <ImageView
-                        android:id="@+id/check"
-                        android:layout_width="0dp"
-                        android:layout_height="22dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="0.28"
-                        tools:ignore="ContentDescription" />
-
-                    <TextView
-
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.90"
-                        android:fontFamily="@font/mulish_regular"
-                        android:text="Card"
-                        android:textColor="@color/black"
-                        android:textSize="13sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearlayout_check_dos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/linearlayout_check_uno">
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="22dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="0.28"
-                        tools:ignore="ContentDescription" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.90"
-                        android:fontFamily="@font/mulish_regular"
-                        android:gravity="center_vertical"
-                        android:text="Card"
-                        android:textColor="@color/black"
-                        android:textSize="13sp" />
-
-                </LinearLayout>
+                    android:fontFamily="@font/mulish_regular"
+                    android:padding="15dp"
+                    android:text="@string/texto_card_view"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textAlignment="textStart"
+                    android:drawablePadding="18dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                    app:layout_constraintStart_toEndOf="@+id/imageView2"
+                    app:layout_constraintTop_toTopOf="@+id/imageView2"
+                    app:drawableStartCompat="@drawable/ic_baseline_warning_24" />
 
             </LinearLayout>
 

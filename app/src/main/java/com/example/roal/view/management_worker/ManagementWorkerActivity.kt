@@ -91,7 +91,7 @@ class ManagementWorkerActivity : AppCompatActivity() {
                     val textFullName = "$textName $textLastName"
                     val textArea = response.body()?.area
                     val textDateBirth = response.body()?.date_birth
-                    val textJoinDate = response.body()?.date_birth
+                    val textJoinDate = response.body()?.date_join
                     val textPhone = response.body()?.phone
                     val textPhoto = response.body()?.photo
                     textPhoto.let {

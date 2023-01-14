@@ -18,11 +18,11 @@ class Workers(
     @SerializedName("photo") val photo: String ? = null
 ){
 
-    override fun toString(): String {
-        return "Workers(dni=$dni, name=$name, lastname=$lastname, date_birth=$date_birth, area=$area, blood_type=$blood_type, diseases=$diseases, allergies=$allergies, phone=$phone, phone_emergency=$phone_emergency, photo=$photo)"
-    }
-
     fun toJson(): String {
         return Gson().toJson(this)
+    }
+
+    override fun toString(): String {
+        return "Workers(dni=$dni, name=$name, lastname=$lastname, date_birth=$date_birth, date_join=$date_join, area=$area, blood_type=$blood_type, diseases=$diseases, allergies=$allergies, phone=$phone, phone_emergency=$phone_emergency, photo=$photo)"
     }
 }

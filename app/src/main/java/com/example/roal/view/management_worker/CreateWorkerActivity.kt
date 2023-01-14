@@ -114,16 +114,16 @@ class CreateWorkerActivity : AppCompatActivity() {
         val dni = binding.textDNI.text.toString()
         val name = binding.textName.text.toString()
         val lastname = binding.textLastname.text.toString()
-        val date_birth = binding.textBornDate.text.toString()
-        //    val date_join = binding.textJoinDate.text.toString()
+        val dateBirth = binding.textBornDate.text.toString()
+        val dateJoin = binding.textJoinDate.text.toString()
         val area = binding.textArea.text.toString()
-        val blood_type = binding.textBlood.text.toString()
+        val bloodType = binding.textBlood.text.toString()
         val diseases = binding.textIllness.text.toString()
         val allergies = binding.textAllergies.text.toString()
         val phone = binding.textPhone.text.toString()
-        val phone_emergency = binding.textPhoneEmergency.text.toString()
+        val phoneEmergency = binding.textPhoneEmergency.text.toString()
 
-        if (isValidForm(dni, name, lastname, area, phone, phone_emergency)) {
+        if (isValidForm(dni, name, lastname, area, phone, phoneEmergency)) {
             showLoading()
             startImageForResult.let {
                 if (imageFile != null) {
@@ -132,14 +132,14 @@ class CreateWorkerActivity : AppCompatActivity() {
                         dni = dni,
                         name = name,
                         lastname = lastname,
-                        date_birth = date_birth,
-                        //   date_join = date_join,
+                        date_birth = dateBirth,
+                        date_join = dateJoin,
                         area = area,
-                        blood_type = blood_type,
+                        blood_type = bloodType,
                         diseases = diseases,
                         allergies = allergies,
                         phone = phone,
-                        phone_emergency = phone_emergency,
+                        phone_emergency = phoneEmergency,
                         photo = imageBase
                     )
 
