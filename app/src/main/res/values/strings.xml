@@ -72,4 +72,5 @@
     <string name="fecha_de_creaci_n">Fecha de creación</string>
     <string name="password">*************</string>
     <string name="salir">Salir</string>
+    <string name="texto_card_view">Estamos comenzando, pronto oiras sobre nosotros</string>
 </resources>
