@@ -29,7 +29,7 @@ class HomeActivity : AppCompatActivity() {
             startActivity(i)
         }
 
-        binding.cardviewPerfil?.setOnClickListener {
+        binding.cardviewPerfil.setOnClickListener {
             val i = Intent(applicationContext, PerfilActivity::class.java)
             startActivity(i)
         }

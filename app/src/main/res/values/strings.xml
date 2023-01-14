@@ -70,4 +70,6 @@
     <string name="subtitle_delete_data">Estas seguro de borrar esta información?</string>
     <string name="successful_delete_data">Información del trabajador borrado</string>
     <string name="fecha_de_creaci_n">Fecha de creación</string>
+    <string name="password">*************</string>
+    <string name="salir">Salir</string>
 </resources>

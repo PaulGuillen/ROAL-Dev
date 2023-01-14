@@ -29,7 +29,7 @@
             android:layout_gravity="center"
             android:layout_margin="20dp"
             android:padding="10dp"
-            android:text="Salir"
+            android:text="@string/salir"
             android:textAllCaps="false"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,10 +59,10 @@
                 android:id="@+id/text_full_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/mulish_bold"
                 android:padding="10dp"
                 android:text="@string/nombre_completo"
                 android:textAlignment="center"
-                android:fontFamily="@font/mulish_bold"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -122,13 +122,10 @@
                     android:enabled="false"
                     android:fontFamily="@font/mulish_bold"
                     android:inputType="textPassword"
-                    android:text="*************"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
+                    android:text="@string/password"
                     android:textSize="17sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
 
         </LinearLayout>
 
@@ -146,7 +143,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

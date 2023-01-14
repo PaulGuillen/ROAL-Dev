@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import com.example.roal.R
-import com.example.roal.databinding.ActivityCreateWorkerBinding
 import com.example.roal.databinding.ActivityPerfilBinding
 
 @SuppressLint("SourceLockedOrientationActivity")
