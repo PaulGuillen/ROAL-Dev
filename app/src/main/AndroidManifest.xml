@@ -18,15 +18,23 @@
         android:theme="@style/Theme.ROAL"
         tools:targetApi="31">
         <activity
-            android:name=".view.home_options.CreateWorkerActivity"
+            android:name=".view.perfil_admin.PerfilActivity"
             android:exported="false"
-            android:parentActivityName=".view.home_options.ManagementWorkerActivity">
+            android:parentActivityName=".view.HomeActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.home_options.ManagementWorkerActivity"
+            android:name=".view.management_worker.CreateWorkerActivity"
+            android:exported="false"
+            android:parentActivityName=".view.management_worker.ManagementWorkerActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".view.management_worker.ManagementWorkerActivity"
             android:exported="false"
             android:parentActivityName=".view.HomeActivity">
             <meta-data

@@ -6,7 +6,8 @@ import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.roal.databinding.ActivityHomeBinding
-import com.example.roal.view.home_options.ManagementWorkerActivity
+import com.example.roal.view.management_worker.ManagementWorkerActivity
+import com.example.roal.view.perfil_admin.PerfilActivity
 
 @SuppressLint("SourceLockedOrientationActivity")
 class HomeActivity : AppCompatActivity() {
@@ -25,6 +26,11 @@ class HomeActivity : AppCompatActivity() {
     private fun selectOption(){
         binding.cardviewMantenimiento?.setOnClickListener {
             val i = Intent(applicationContext, ManagementWorkerActivity::class.java)
+            startActivity(i)
+        }
+
+        binding.cardviewPerfil?.setOnClickListener {
+            val i = Intent(applicationContext, PerfilActivity::class.java)
             startActivity(i)
         }
     }

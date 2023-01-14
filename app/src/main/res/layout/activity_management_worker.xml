@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".view.home_options.ManagementWorkerActivity">
+    tools:context=".view.management_worker.ManagementWorkerActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintGeneral"
