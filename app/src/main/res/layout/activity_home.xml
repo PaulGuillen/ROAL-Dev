@@ -46,7 +46,6 @@
                     android:fontFamily="@font/mulish_bold"
                     android:text="@string/estructuras_publicitarias"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
                     android:textSize="25sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -99,9 +98,9 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:singleLine="true"
+                        android:textStyle="bold"
                         android:text="@string/mantenimiento_trabajdores"
                         android:textAlignment="center"
-                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -140,9 +139,9 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:singleLine="true"
+                        android:textStyle="bold"
                         android:text="@string/validacion_epp"
                         android:textAlignment="center"
-                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -181,9 +180,9 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:singleLine="true"
+                        android:textStyle="bold"
                         android:text="@string/reportes_trabajadores"
                         android:textAlignment="center"
-                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -222,9 +221,9 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:singleLine="true"
+                        android:textStyle="bold"
                         android:text="@string/perfil"
                         android:textAlignment="center"
-                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -264,8 +263,8 @@
                         android:ellipsize="end"
                         android:singleLine="true"
                         android:text="@string/emergencias"
+                        android:textStyle="bold"
                         android:textAlignment="center"
-                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -303,10 +302,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
+                        android:textStyle="bold"
                         android:singleLine="true"
                         android:text="@string/ajustes"
                         android:textAlignment="center"
-                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                 </LinearLayout>
