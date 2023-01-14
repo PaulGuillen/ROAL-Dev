@@ -8,6 +8,7 @@ import android.os.Bundle
 import com.example.roal.databinding.ActivityHomeBinding
 import com.example.roal.view.management_worker.ManagementWorkerActivity
 import com.example.roal.view.perfil_admin.PerfilActivity
+import com.example.roal.view.settings.SettingsActivity
 
 @SuppressLint("SourceLockedOrientationActivity")
 class HomeActivity : AppCompatActivity() {
@@ -24,13 +25,18 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun selectOption(){
-        binding.cardviewMantenimiento?.setOnClickListener {
+        binding.cardviewMantenimiento.setOnClickListener {
             val i = Intent(applicationContext, ManagementWorkerActivity::class.java)
             startActivity(i)
         }
 
         binding.cardviewPerfil.setOnClickListener {
             val i = Intent(applicationContext, PerfilActivity::class.java)
+            startActivity(i)
+        }
+
+        binding.cardviewAjustes.setOnClickListener {
+            val i = Intent(applicationContext, SettingsActivity::class.java)
             startActivity(i)
         }
     }
