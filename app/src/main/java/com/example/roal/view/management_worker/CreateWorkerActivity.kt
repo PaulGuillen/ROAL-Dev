@@ -64,7 +64,7 @@ class CreateWorkerActivity : AppCompatActivity() {
             "textBornDate" -> {
                 val myCalendar = Calendar.getInstance()
 
-                val datePicker = DatePickerDialog.OnDateSetListener { view, year, month, dayofMonth ->
+                val datePicker = DatePickerDialog.OnDateSetListener { _, year, month, dayofMonth ->
                     myCalendar.set(Calendar.YEAR, year)
                     myCalendar.set(Calendar.MONTH, month)
                     myCalendar.set(Calendar.DAY_OF_MONTH, dayofMonth)
@@ -79,7 +79,7 @@ class CreateWorkerActivity : AppCompatActivity() {
             "textJoinDate" -> {
                 val myCalendar = Calendar.getInstance()
 
-                val datePicker = DatePickerDialog.OnDateSetListener { view, year, month, dayofMonth ->
+                val datePicker = DatePickerDialog.OnDateSetListener { _, year, month, dayofMonth ->
                     myCalendar.set(Calendar.YEAR, year)
                     myCalendar.set(Calendar.MONTH, month)
                     myCalendar.set(Calendar.DAY_OF_MONTH, dayofMonth)
@@ -244,9 +244,7 @@ class CreateWorkerActivity : AppCompatActivity() {
             toggleTextInputLayoutError(binding.textLastname, messageError)
             return false
         }
-//        if (dateJoin.isBlank()) {
-//            return false
-//        }
+
         if (phone.isBlank() || phone.length < 9) {
             val messageError = getString(R.string.mandatory)
             toggleTextInputLayoutError(binding.textPhone, messageError)
