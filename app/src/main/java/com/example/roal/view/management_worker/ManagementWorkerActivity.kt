@@ -44,7 +44,6 @@ class ManagementWorkerActivity : AppCompatActivity() {
 
         binding.fabWorkerCreate.setOnClickListener { goToWorkerCreate() }
         binding.btnDelete.setOnClickListener { deleteWorker() }
-        //binding.btnBuscar.setOnClickListener { getWorkers() }
         searchWorkers()
     }
 
@@ -54,11 +53,30 @@ class ManagementWorkerActivity : AppCompatActivity() {
             .setContentText(getString(R.string.subtitle_delete_data))
             .setCancelText("No").setCancelClickListener { obj: SweetAlertDialog -> obj.dismiss() }
             .setConfirmText("Si")
-            .setConfirmClickListener { sDialog: SweetAlertDialog ->
-                SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-                    .setTitleText(getString(R.string.successful_delete_data)).show()
-                sDialog.dismiss()
+            .setConfirmClickListener {
+                deleteWorkers()
+                it.dismiss()
             }.show()
+    }
+
+    private fun deleteWorkers() {
+
+        val actualIdentification = binding.textViewDNI.text.toString()
+
+        workersProvider.deleteWorker(actualIdentification)?.enqueue(object : Callback<WorkersResponse> {
+            override fun onResponse(call: Call<WorkersResponse>, response: Response<WorkersResponse>) {
+                binding.textNoData.visibility = View.VISIBLE
+                binding.cardViewWorker.visibility = View.GONE
+                SweetAlertDialog(this@ManagementWorkerActivity, SweetAlertDialog.SUCCESS_TYPE)
+                    .setTitleText(getString(R.string.successful_delete_data)).show()
+            }
+
+            override fun onFailure(call: Call<WorkersResponse>, t: Throwable) {
+                Toast.makeText(this@ManagementWorkerActivity, "Error : $t", Toast.LENGTH_LONG).show()
+            }
+
+        })
+
     }
 
     private fun searchWorkers() {

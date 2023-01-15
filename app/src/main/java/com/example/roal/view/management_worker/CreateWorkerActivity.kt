@@ -154,12 +154,12 @@ class CreateWorkerActivity : AppCompatActivity() {
                                     clearForm()
                                     SweetAlertDialog(this@CreateWorkerActivity, SweetAlertDialog.SUCCESS_TYPE)
                                         .setTitleText(getString(R.string.title_200_register_worker))
-                                        .show();
+                                        .show()
                                 } else {
                                     hideLoading()
                                     SweetAlertDialog(this@CreateWorkerActivity, SweetAlertDialog.ERROR_TYPE)
                                         .setTitleText(getString(R.string.title_error_register))
-                                        .show();
+                                        .show()
                                 }
                             }
 
@@ -174,14 +174,14 @@ class CreateWorkerActivity : AppCompatActivity() {
                     hideLoading()
                     SweetAlertDialog(this@CreateWorkerActivity, SweetAlertDialog.WARNING_TYPE)
                         .setTitleText(getString(R.string.title_404_image))
-                        .show();
+                        .show()
                 }
             }
         } else {
             SweetAlertDialog(this@CreateWorkerActivity, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText(getString(R.string.title_missing_parameters))
                 .setContentText(getString(R.string.subtitle_missing_parameters))
-                .show();
+                .show()
         }
     }
 
