@@ -26,6 +26,6 @@ interface WorkersRoutes {
 
     @DELETE("prod/delete_worker/{dni}")
     fun deleteWorker(
-        @Query("dni") dni: String
+        @Path("dni") dni: String
     ):  Call<WorkersResponse>
 }

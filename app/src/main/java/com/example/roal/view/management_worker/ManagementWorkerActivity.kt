@@ -19,6 +19,10 @@ import com.example.roal.R
 import com.example.roal.databinding.ActivityManagementWorkerBinding
 import com.example.roal.models.WorkersResponse
 import com.example.roal.providers.WorkersProvider
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeoutOrNull
+import okhttp3.Dispatcher
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -62,16 +66,17 @@ class ManagementWorkerActivity : AppCompatActivity() {
     private fun deleteWorkers() {
 
         val actualIdentification = binding.textViewDNI.text.toString()
-
+        showLoading()
         workersProvider.deleteWorker(actualIdentification)?.enqueue(object : Callback<WorkersResponse> {
             override fun onResponse(call: Call<WorkersResponse>, response: Response<WorkersResponse>) {
+                hideLoading()
                 binding.textNoData.visibility = View.VISIBLE
                 binding.cardViewWorker.visibility = View.GONE
                 SweetAlertDialog(this@ManagementWorkerActivity, SweetAlertDialog.SUCCESS_TYPE)
                     .setTitleText(getString(R.string.successful_delete_data)).show()
             }
-
             override fun onFailure(call: Call<WorkersResponse>, t: Throwable) {
+                hideLoading()
                 Toast.makeText(this@ManagementWorkerActivity, "Error : $t", Toast.LENGTH_LONG).show()
             }
 
