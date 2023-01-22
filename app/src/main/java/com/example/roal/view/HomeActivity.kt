@@ -30,9 +30,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         binding.cardviewPerfil.setOnClickListener {
-            val dni = intent.getStringExtra("dni")
             val i = Intent(applicationContext, PerfilActivity::class.java)
-            intent.putExtra("dni",dni)
             startActivity(i)
         }
 

@@ -11,7 +11,7 @@ import retrofit2.http.POST
 interface UsersRoutes {
 
     @POST("prod/roal_app_login/login")
-    fun login(@Body mainUser: MainUser): Call<MainUser>
+    fun login(@Body mainUser: MainUser): Call<ResponseHttp>
 
     @POST("prod/roal_app_login/login")
     fun recoveryPassword(@Body mainUser: MainUser): Call<ResponseHttp>

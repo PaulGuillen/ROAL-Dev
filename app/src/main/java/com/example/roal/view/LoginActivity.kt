@@ -44,14 +44,11 @@ class LoginActivity : AppCompatActivity() {
         )
         if (isValidForm(email, password)) {
             showLoading()
-            usersProvider.login(mainUser)?.enqueue(object : Callback<MainUser> {
-                override fun onResponse(call: Call<MainUser>, response: Response<MainUser>) {
+            usersProvider.login(mainUser)?.enqueue(object : Callback<ResponseHttp> {
+                override fun onResponse(call: Call<ResponseHttp>, response: Response<ResponseHttp>) {
                     if (response.body()?.code == 200) {
                         hideLoading()
                         goToHomeDashboard()
-                        val stringDni = response.body()?.dni.toString()
-                        val callInt = Intent(this@LoginActivity ,HomeActivity::class.java)
-                        callInt.putExtra("dni",stringDni)
                         Toast.makeText(this@LoginActivity, "Inicio de sesión exitoso", Toast.LENGTH_LONG).show()
                     } else {
                         hideLoading()
@@ -59,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(p0: Call<MainUser>, t: Throwable) {
+                override fun onFailure(p0: Call<ResponseHttp>, t: Throwable) {
                     hideLoading()
                     Toast.makeText(this@LoginActivity, "Hubo un error ${t.message}", Toast.LENGTH_LONG).show()
                 }
