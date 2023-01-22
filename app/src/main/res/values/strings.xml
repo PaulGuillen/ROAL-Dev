@@ -74,4 +74,7 @@
     <string name="salir">Salir</string>
     <string name="texto_card_view">Estamos comenzando, pronto oiras sobre nosotros</string>
     <string name="buscar">Buscar</string>
+    <string name="tipos_de_busquedad">Tipos de busquedad</string>
+    <string name="foto">Foto</string>
+    <string name="qr">QR</string>
 </resources>
