@@ -46,8 +46,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/searchByDNI"
@@ -89,7 +89,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:autofillHints="no"
-                android:visibility="gone"
                 android:background="@drawable/search_gb"
                 android:drawableEnd="@drawable/ic_baseline_search_24"
                 android:elevation="5dp"
@@ -112,60 +111,81 @@
             android:id="@+id/linearDNI"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/btnRegistrarTrabajador"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearButtons">
 
-
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginStart="20dp"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="10dp"
-                android:layout_marginEnd="20dp">
+                app:cardElevation="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:textAlignment="center"
-                        android:layout_margin="10dp"
-                        android:text="Datos generales"
-                        android:fontFamily="@font/mulish_bold"
-                        android:textSize="20sp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/mulish_bold"
+                        android:text="@string/datos_generales"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/subtitulosGeneral"
+                        android:textSize="20sp" />
 
                     <View
                         android:layout_width="match_parent"
-                        android:background="@color/gray"
-                        android:layout_height="3dp"/>
+                        android:layout_height="3dp"
+                        android:background="@color/gray" />
 
-                    <TextView
-                        android:textAlignment="textEnd"
-                        android:layout_margin="10dp"
-                        android:text="@string/dni"
-                        android:fontFamily="@font/mulish_bold"
-                        android:textSize="20sp"
-                        android:paddingEnd="15dp"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        tools:ignore="RtlSymmetry" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:fontFamily="@font/mulish_bold"
+                            android:text="@string/nombre_completo"
+                            android:textAlignment="center"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:fontFamily="@font/mulish_bold"
+                            android:text="@string/dni"
+                            android:textAlignment="textEnd"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="@color/gray" />
 
                     <TextView
-                        android:textAlignment="textStart"
-                        android:layout_margin="10dp"
-                        android:text="@string/nombre_completo"
-                        android:fontFamily="@font/mulish_bold"
-                        android:textSize="20sp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/mulish_bold"
+                        android:text="@string/celulares"
+                        android:textAlignment="textStart"
+                        android:textAppearance="@style/subtitulosGeneral"
+                        android:textSize="20sp" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -176,21 +196,23 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:fontFamily="@font/mulish_bold"
+                            android:paddingStart="10dp"
                             android:text="@string/celular_principal"
                             android:textAlignment="textStart"
                             android:textSize="20sp"
                             app:layout_constraintBottom_toBottomOf="@+id/btn_inicial"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/btn_inicial" />
+                            app:layout_constraintTop_toTopOf="@+id/btn_inicial"
+                            tools:ignore="RtlSymmetry" />
 
                         <Button
                             android:id="@+id/btn_inicial"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/mulish_bold"
                             android:layout_marginEnd="15dp"
+                            android:fontFamily="@font/mulish_bold"
                             android:padding="15dp"
-                            android:text="Llamar"
+                            android:text="@string/llamar"
                             android:textAllCaps="false"
                             android:textColor="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -208,21 +230,23 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:fontFamily="@font/mulish_bold"
+                            android:paddingStart="10dp"
                             android:text="@string/celular_secundario"
                             android:textAlignment="textStart"
                             android:textSize="20sp"
                             app:layout_constraintBottom_toBottomOf="@+id/secondCall"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/secondCall" />
+                            app:layout_constraintTop_toTopOf="@+id/secondCall"
+                            tools:ignore="RtlSymmetry" />
 
                         <Button
                             android:id="@+id/secondCall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/mulish_bold"
                             android:layout_marginEnd="15dp"
+                            android:fontFamily="@font/mulish_bold"
                             android:padding="15dp"
-                            android:text="Llamar"
+                            android:text="@string/llamar"
                             android:textAllCaps="false"
                             android:textColor="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -230,6 +254,128 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/mulish_bold"
+                        android:text="@string/fechas"
+                        android:textAlignment="textStart"
+                        android:textAppearance="@style/subtitulosGeneral"
+                        android:textSize="20sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:fontFamily="@font/mulish_bold"
+                            android:paddingStart="10dp"
+                            android:text="@string/nacimiento"
+                            android:textAlignment="textStart"
+                            android:textSize="20sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/mulish_bold"
+                            android:text="@string/_12_10_1998"
+                            android:textAlignment="textStart"
+                            android:textSize="20sp"
+                            tools:ignore="RtlSymmetry" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:fontFamily="@font/mulish_bold"
+                            android:paddingStart="10dp"
+                            android:text="@string/ingreso"
+                            android:textAlignment="textStart"
+                            android:textSize="20sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/mulish_bold"
+                            android:text="@string/_12_10_1998"
+                            android:textAlignment="textStart"
+                            android:textSize="20sp"
+                            tools:ignore="RtlSymmetry" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/mulish_bold"
+                        android:paddingEnd="15dp"
+                        android:text="@string/area_form"
+                        android:textAlignment="textStart"
+                        android:textSize="20sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/mulish_bold"
+                        android:paddingEnd="15dp"
+                        android:text="@string/grupo_sangu_neo_form"
+                        android:textAlignment="textStart"
+                        android:textSize="20sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/mulish_bold"
+                        android:paddingEnd="15dp"
+                        android:text="@string/enfermedades_pre_existentes_form"
+                        android:textAlignment="textStart"
+                        android:textSize="20sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/mulish_bold"
+                        android:paddingEnd="15dp"
+                        android:text="@string/alergias_form"
+                        android:textAlignment="textStart"
+                        android:textSize="20sp"
+                        tools:ignore="RtlSymmetry" />
 
                 </LinearLayout>
 
@@ -244,7 +390,6 @@
             android:layout_margin="30dp"
             android:background="@drawable/rounded_button"
             android:text="@string/buscar"
-            android:visibility="gone"
             android:textAllCaps="false"
             android:textAppearance="@style/botonesGeneral"
             app:layout_constraintBottom_toTopOf="@+id/tvBottomFilter"

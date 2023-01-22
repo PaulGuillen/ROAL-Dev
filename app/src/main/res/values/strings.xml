@@ -77,6 +77,13 @@
     <string name="tipos_de_busquedad">Tipos de busquedad</string>
     <string name="foto">Foto</string>
     <string name="qr">QR</string>
-    <string name="celular_principal">Celular principal</string>
-    <string name="celular_secundario">Celular secundario</string>
+    <string name="celular_principal">Principal</string>
+    <string name="celular_secundario">Secundario</string>
+    <string name="llamar">Llamar</string>
+    <string name="datos_generales">Datos generales</string>
+    <string name="celulares">Celulares</string>
+    <string name="fechas">Fechas</string>
+    <string name="nacimiento">Nacimiento :</string>
+    <string name="_12_10_1998">12-10-1998</string>
+    <string name="ingreso">Ingreso :</string>
 </resources>
