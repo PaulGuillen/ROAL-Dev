@@ -77,4 +77,6 @@
     <string name="tipos_de_busquedad">Tipos de busquedad</string>
     <string name="foto">Foto</string>
     <string name="qr">QR</string>
+    <string name="celular_principal">Celular principal</string>
+    <string name="celular_secundario">Celular secundario</string>
 </resources>
