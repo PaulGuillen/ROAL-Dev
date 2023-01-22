@@ -17,12 +17,8 @@ import com.bumptech.glide.Priority
 import com.bumptech.glide.request.RequestOptions.centerCropTransform
 import com.example.roal.R
 import com.example.roal.databinding.ActivityManagementWorkerBinding
-import com.example.roal.models.WorkersResponse
+import com.example.roal.models.Workers
 import com.example.roal.providers.WorkersProvider
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import kotlinx.coroutines.withTimeoutOrNull
-import okhttp3.Dispatcher
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -67,15 +63,15 @@ class ManagementWorkerActivity : AppCompatActivity() {
 
         val actualIdentification = binding.textViewDNI.text.toString()
         showLoading()
-        workersProvider.deleteWorker(actualIdentification)?.enqueue(object : Callback<WorkersResponse> {
-            override fun onResponse(call: Call<WorkersResponse>, response: Response<WorkersResponse>) {
+        workersProvider.deleteWorker(actualIdentification)?.enqueue(object : Callback<Workers> {
+            override fun onResponse(call: Call<Workers>, response: Response<Workers>) {
                 hideLoading()
                 binding.textNoData.visibility = View.VISIBLE
                 binding.cardViewWorker.visibility = View.GONE
                 SweetAlertDialog(this@ManagementWorkerActivity, SweetAlertDialog.SUCCESS_TYPE)
                     .setTitleText(getString(R.string.successful_delete_data)).show()
             }
-            override fun onFailure(call: Call<WorkersResponse>, t: Throwable) {
+            override fun onFailure(call: Call<Workers>, t: Throwable) {
                 hideLoading()
                 Toast.makeText(this@ManagementWorkerActivity, "Error : $t", Toast.LENGTH_LONG).show()
             }
@@ -102,8 +98,8 @@ class ManagementWorkerActivity : AppCompatActivity() {
     private fun getWorkers() {
         showLoading()
         val dni = binding.searchBox.text.toString()
-        workersProvider.getWorkers(dni)?.enqueue(object : Callback<WorkersResponse> {
-            override fun onResponse(call: Call<WorkersResponse>, response: Response<WorkersResponse>) {
+        workersProvider.getWorkers(dni)?.enqueue(object : Callback<Workers> {
+            override fun onResponse(call: Call<Workers>, response: Response<Workers>) {
                 if (response.body() != null) {
                     hideLoading()
                     binding.textNoData.visibility = View.GONE
@@ -142,7 +138,7 @@ class ManagementWorkerActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<WorkersResponse>, t: Throwable) {
+            override fun onFailure(call: Call<Workers>, t: Throwable) {
                 hideLoading()
                 Toast.makeText(this@ManagementWorkerActivity, "Error: ${t.message}", Toast.LENGTH_LONG).show()
             }

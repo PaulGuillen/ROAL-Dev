@@ -16,7 +16,7 @@ class UsersProvider {
         usersRoutes = api.getMainUserRoutes()
     }
 
-    fun login(mainUser: MainUser): Call<ResponseHttp>? {
+    fun login(mainUser: MainUser): Call<MainUser>? {
         return usersRoutes?.login(mainUser)
     }
 

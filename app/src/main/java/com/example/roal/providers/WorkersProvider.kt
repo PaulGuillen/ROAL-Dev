@@ -3,7 +3,6 @@ package com.example.roal.providers
 import com.example.roal.api.ApiRoutes
 import com.example.roal.models.ResponseHttp
 import com.example.roal.models.Workers
-import com.example.roal.models.WorkersResponse
 import com.example.roal.routes.WorkersRoutes
 import retrofit2.Call
 
@@ -16,13 +15,13 @@ class WorkersProvider {
         workersRoutes = api.getWorkersRoutes()
     }
 
-    fun getWorkers(dni: String): Call<WorkersResponse>? {
+    fun getWorkers(dni: String): Call<Workers>? {
         return workersRoutes?.getWorkers(dni)
     }
     fun postWorkers(workerUser : Workers): Call<ResponseHttp>? {
         return workersRoutes?.creatingWorkers(workerUser)
     }
-    fun deleteWorker(dni: String): Call<WorkersResponse>? {
+    fun deleteWorker(dni: String): Call<Workers>? {
         return workersRoutes?.deleteWorker(dni)
     }
 }

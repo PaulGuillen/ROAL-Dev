@@ -8,7 +8,8 @@ class MainUser(
     @SerializedName("password") val password: String? = null,
     @SerializedName("action") val action: String? = null,
     @SerializedName("code") val code: Int ? = null,
-    @SerializedName("new_password") val new_password: String? = null
+    @SerializedName("new_password") val new_password: String? = null,
+    @SerializedName("dni") val dni: String? = null
 ) {
     fun toJson(): String {
         return Gson().toJson(this)

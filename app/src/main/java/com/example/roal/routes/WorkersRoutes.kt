@@ -2,8 +2,6 @@ package com.example.roal.routes
 
 import com.example.roal.models.ResponseHttp
 import com.example.roal.models.Workers
-import com.example.roal.models.WorkersResponse
-import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -17,7 +15,7 @@ interface WorkersRoutes {
     @GET("prod/get_worker/{dni}")
     fun getWorkers(
         @Query("dni") dni: String
-    ):  Call<WorkersResponse>
+    ):  Call<Workers>
 
     @POST("prod/register_worker")
     fun creatingWorkers(
@@ -27,5 +25,5 @@ interface WorkersRoutes {
     @DELETE("prod/delete_worker/{dni}")
     fun deleteWorker(
         @Path("dni") dni: String
-    ):  Call<WorkersResponse>
+    ):  Call<Workers>
 }
