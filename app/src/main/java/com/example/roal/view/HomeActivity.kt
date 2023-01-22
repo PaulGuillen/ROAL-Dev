@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.roal.databinding.ActivityHomeBinding
+import com.example.roal.view.emergency.EmergencyActivity
 import com.example.roal.view.management_worker.ManagementWorkerActivity
 import com.example.roal.view.perfil_admin.PerfilActivity
 import com.example.roal.view.settings.SettingsActivity
@@ -36,6 +37,11 @@ class HomeActivity : AppCompatActivity() {
 
         binding.cardviewAjustes.setOnClickListener {
             val i = Intent(applicationContext, SettingsActivity::class.java)
+            startActivity(i)
+        }
+
+        binding.cardviewEmergencia.setOnClickListener {
+            val i = Intent(applicationContext, EmergencyActivity::class.java)
             startActivity(i)
         }
     }

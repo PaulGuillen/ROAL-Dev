@@ -73,4 +73,5 @@
     <string name="password">*************</string>
     <string name="salir">Salir</string>
     <string name="texto_card_view">Estamos comenzando, pronto oiras sobre nosotros</string>
+    <string name="buscar">Buscar</string>
 </resources>
