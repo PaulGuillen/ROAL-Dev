@@ -4,7 +4,6 @@ import com.example.roal.api.ApiRoutes
 import com.example.roal.models.MainUser
 import com.example.roal.models.ResponseHttp
 import com.example.roal.routes.UsersRoutes
-import com.google.gson.Gson
 import retrofit2.Call
 
 class UsersProvider {
