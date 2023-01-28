@@ -6,6 +6,9 @@ import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
+import com.bumptech.glide.request.RequestOptions
 import com.example.roal.R
 import com.example.roal.databinding.ActivityPerfilBinding
 import com.example.roal.models.MainUser
@@ -41,6 +44,7 @@ class PerfilActivity : AppCompatActivity() {
         showLoading()
         val email = intent.getStringExtra("email").toString()
         usersProvider.getMainData(email)?.enqueue(object  : Callback<MainUser> {
+            @SuppressLint("SetTextI18n")
             override fun onResponse(call: Call<MainUser>, response: Response<MainUser>) {
                 if(response.isSuccessful){
                     hideLoading()
@@ -51,9 +55,25 @@ class PerfilActivity : AppCompatActivity() {
                     val textFullName = "$textName $textLastName"
                     val textCreateAccount = response.body()?.createDateAccount
                     val textPassword = response.body()?.password
-
+                    val textPhoto = response.body()?.photo
+                    textPhoto.let {
+                        Glide.with(this@PerfilActivity)
+                            .load(textPhoto)
+                            .apply(
+                                RequestOptions.centerCropTransform()
+                                    .placeholder(R.drawable.ic_baseline_supervised_user_circle_24)
+                                    .error(R.drawable.ic_baseline_supervised_user_circle_24)
+                                    .priority(Priority.HIGH)
+                            )
+                            .into(binding.imageWorker)
+                    }
+                    if (textDNI != "" ){
+                        binding.textDNI.text = textDNI
+                    }else{
+                        binding.textDNI.text = "DNI no encontrado"
+                    }
                     binding.textFullName.text = textFullName
-                    binding.textDNI.text = textDNI
+
                     binding.textJoinCreateAccount.setText(textCreateAccount)
                     binding.textPassword.setText(textPassword)
                     binding.textEmail.setText(textEmail)
