@@ -26,4 +26,9 @@ interface WorkersRoutes {
     fun deleteWorker(
         @Path("dni") dni: String
     ):  Call<Workers>
+
+    @POST("prod/consult_photo")
+    fun consultByPhoto(
+        @Body workerUser: Workers
+    ):  Call<Workers>
 }

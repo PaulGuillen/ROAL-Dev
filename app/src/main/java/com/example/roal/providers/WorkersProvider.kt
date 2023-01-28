@@ -24,4 +24,7 @@ class WorkersProvider {
     fun deleteWorker(dni: String): Call<Workers>? {
         return workersRoutes?.deleteWorker(dni)
     }
+    fun consultByPhoto(workerUser : Workers): Call<Workers>? {
+        return workersRoutes?.consultByPhoto(workerUser)
+    }
 }

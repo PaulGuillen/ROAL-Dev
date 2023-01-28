@@ -21,17 +21,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textMain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/tipos_de_busquedad"
-            android:textAlignment="center"
-            android:textAppearance="@style/subtitulosGeneral"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include" />
-
         <LinearLayout
             android:id="@+id/linearButtons"
             android:layout_width="match_parent"
@@ -42,7 +31,7 @@
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textMain">
+            app:layout_constraintTop_toBottomOf="@+id/include">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -87,9 +76,8 @@
                 android:id="@+id/searchBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="15dp"
                 android:autofillHints="no"
-                android:visibility="gone"
                 android:background="@drawable/search_gb"
                 android:drawableEnd="@drawable/ic_baseline_search_24"
                 android:elevation="5dp"
@@ -98,6 +86,7 @@
                 android:imeOptions="actionSearch"
                 android:inputType="number"
                 android:maxLength="8"
+                android:visibility="gone"
                 android:maxLines="1"
                 android:padding="12dp"
                 android:textSize="14sp"
@@ -109,12 +98,12 @@
             <ImageView
                 android:id="@+id/imagePhoto"
                 android:layout_width="match_parent"
-                android:layout_height="340dp"
+                android:layout_height="310dp"
                 android:layout_marginTop="30dp"
                 android:background="@color/gray_light"
                 android:contentDescription="@string/todo"
-                android:visibility="gone"
                 android:src="@drawable/ic_baseline_image_24"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/include" />
@@ -122,12 +111,12 @@
             <ImageView
                 android:id="@+id/imageQR"
                 android:layout_width="match_parent"
-                android:layout_height="340dp"
+                android:layout_height="310dp"
                 android:layout_marginTop="30dp"
                 android:background="@color/gray_light"
-                android:visibility="gone"
                 android:contentDescription="@string/todo"
                 android:src="@drawable/ic_baseline_camera_alt_24"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/include" />
@@ -138,10 +127,9 @@
             android:id="@+id/linearDNI"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
             android:orientation="vertical"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/btnSearch"
+            app:layout_constraintBottom_toTopOf="@+id/tvBottomFilter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearButtons">
@@ -149,11 +137,12 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="10dp">
+                app:cardElevation="15dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -181,6 +170,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/textFullName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
@@ -190,6 +180,7 @@
                             android:textSize="20sp" />
 
                         <TextView
+                            android:id="@+id/textDNI"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
@@ -220,6 +211,7 @@
                         android:layout_height="wrap_content">
 
                         <TextView
+                            android:id="@+id/textPrincipal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
@@ -228,13 +220,13 @@
                             android:text="@string/celular_principal"
                             android:textAlignment="textStart"
                             android:textSize="20sp"
-                            app:layout_constraintBottom_toBottomOf="@+id/btn_inicial"
+                            app:layout_constraintBottom_toBottomOf="@+id/btnPhonePrincipal"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/btn_inicial"
+                            app:layout_constraintTop_toTopOf="@+id/btnPhonePrincipal"
                             tools:ignore="RtlSymmetry" />
 
                         <Button
-                            android:id="@+id/btn_inicial"
+                            android:id="@+id/btnPhonePrincipal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="15dp"
@@ -254,6 +246,7 @@
                         android:layout_height="wrap_content">
 
                         <TextView
+                            android:id="@+id/textSecondary"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
@@ -262,13 +255,13 @@
                             android:text="@string/celular_secundario"
                             android:textAlignment="textStart"
                             android:textSize="20sp"
-                            app:layout_constraintBottom_toBottomOf="@+id/secondCall"
+                            app:layout_constraintBottom_toBottomOf="@+id/btnPhoneSecondary"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/secondCall"
+                            app:layout_constraintTop_toTopOf="@+id/btnPhoneSecondary"
                             tools:ignore="RtlSymmetry" />
 
                         <Button
-                            android:id="@+id/secondCall"
+                            android:id="@+id/btnPhoneSecondary"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="15dp"
@@ -317,6 +310,7 @@
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
+                            android:id="@+id/textBornDate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/mulish_bold"
@@ -345,6 +339,7 @@
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
+                            android:id="@+id/textJoinDate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/mulish_bold"
@@ -362,6 +357,7 @@
                         android:background="@color/gray" />
 
                     <TextView
+                        android:id="@+id/textArea"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -373,6 +369,7 @@
                         tools:ignore="RtlSymmetry" />
 
                     <TextView
+                        android:id="@+id/textBloodType"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -384,6 +381,7 @@
                         tools:ignore="RtlSymmetry" />
 
                     <TextView
+                        android:id="@+id/textDiseases"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -395,6 +393,7 @@
                         tools:ignore="RtlSymmetry" />
 
                     <TextView
+                        android:id="@+id/textAllergies"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -410,20 +409,6 @@
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
-
-        <Button
-            android:id="@+id/btnSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            android:background="@drawable/rounded_button"
-            android:text="@string/buscar"
-            android:textAllCaps="false"
-            android:visibility="gone"
-            android:textAppearance="@style/botonesGeneral"
-            app:layout_constraintBottom_toTopOf="@+id/tvBottomFilter"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/tvBottomFilter"

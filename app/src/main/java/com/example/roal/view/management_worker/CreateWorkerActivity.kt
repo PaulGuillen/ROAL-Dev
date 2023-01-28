@@ -171,14 +171,11 @@ class CreateWorkerActivity : AppCompatActivity() {
 
                        })
                    }
-               } ?: {
-                   hideLoading()
+               } ?: hideLoading()
                    SweetAlertDialog(this@CreateWorkerActivity, SweetAlertDialog.WARNING_TYPE)
                        .setTitleText(getString(R.string.title_404_image))
                        .setContentText(getString(R.string.subtitle_image_description))
                        .show();
-               }
-
 
             }
         } else {
