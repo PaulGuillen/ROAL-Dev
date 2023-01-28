@@ -50,7 +50,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/searchByDNI"
+                    android:id="@+id/btnSearchByDNI"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -60,7 +60,7 @@
                     tools:ignore="ButtonStyle" />
 
                 <Button
-                    android:id="@+id/searchByPhoto"
+                    android:id="@+id/btnSearchByPhoto"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -71,7 +71,7 @@
                     tools:ignore="ButtonStyle" />
 
                 <Button
-                    android:id="@+id/searchByQR"
+                    android:id="@+id/btnSearchByQR"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -89,6 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:autofillHints="no"
+                android:visibility="gone"
                 android:background="@drawable/search_gb"
                 android:drawableEnd="@drawable/ic_baseline_search_24"
                 android:elevation="5dp"
@@ -105,6 +106,32 @@
                 app:layout_constraintTop_toBottomOf="@+id/include"
                 tools:ignore="RtlSymmetry" />
 
+            <ImageView
+                android:id="@+id/imagePhoto"
+                android:layout_width="match_parent"
+                android:layout_height="340dp"
+                android:layout_marginTop="30dp"
+                android:background="@color/gray_light"
+                android:contentDescription="@string/todo"
+                android:visibility="gone"
+                android:src="@drawable/ic_baseline_image_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include" />
+
+            <ImageView
+                android:id="@+id/imageQR"
+                android:layout_width="match_parent"
+                android:layout_height="340dp"
+                android:layout_marginTop="30dp"
+                android:background="@color/gray_light"
+                android:visibility="gone"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_baseline_camera_alt_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -113,7 +140,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/btnRegistrarTrabajador"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/btnSearch"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearButtons">
@@ -384,13 +412,14 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnRegistrarTrabajador"
+            android:id="@+id/btnSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             android:background="@drawable/rounded_button"
             android:text="@string/buscar"
             android:textAllCaps="false"
+            android:visibility="gone"
             android:textAppearance="@style/botonesGeneral"
             app:layout_constraintBottom_toTopOf="@+id/tvBottomFilter"
             app:layout_constraintEnd_toEndOf="parent"
