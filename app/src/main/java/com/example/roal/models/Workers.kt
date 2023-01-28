@@ -15,7 +15,8 @@ class Workers(
     @SerializedName("allergies") val allergies: String ? = null,
     @SerializedName("phone") val phone: String ? = null,
     @SerializedName("phone_emergency") val phone_emergency: String ? = null,
-    @SerializedName("photo") val photo: String ? = null
+    @SerializedName("photo") val photo: String ? = null,
+    @SerializedName("photo_format") val photoFormat: String ? = null
 ){
 
     fun toJson(): String {

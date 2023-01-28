@@ -2,10 +2,11 @@ package com.example.roal.view
 
 import android.app.Dialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.roal.databinding.ActivityLoginBinding
 import com.example.roal.models.MainUser
 import com.example.roal.models.ResponseHttp
@@ -13,7 +14,9 @@ import com.example.roal.providers.UsersProvider
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 import utils.ChargeDialog
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -26,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        Timber.i("OnCreate")
         binding.btnLogin.setOnClickListener { goToHomeView() }
         binding.textForgotPassword.setOnClickListener { gotToForgotPasswordView() }
     }
@@ -94,9 +97,12 @@ class LoginActivity : AppCompatActivity() {
 
     private fun goToHomeDashboard() {
         val i = Intent(this, HomeActivity::class.java)
-        val email = binding.textEmail.text.toString()
+        val preferences = getSharedPreferences("temp", MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = preferences.edit()
+        editor.putString("name", binding.textEmail.text.toString())
+        editor.apply()
+        Timber.i("SharedPref = Inicializado")
         i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        i.putExtra("email" , email)
         startActivity(i)
     }
 

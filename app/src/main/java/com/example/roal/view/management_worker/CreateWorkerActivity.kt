@@ -126,56 +126,60 @@ class CreateWorkerActivity : AppCompatActivity() {
         if (isValidForm(dni, name, lastname, area, phone, phoneEmergency)) {
             showLoading()
             startImageForResult.let {
-                if (imageFile != null) {
-                    val imageBase = imageFile?.toUri()?.let { it1 -> getBase64ForUriAndPossiblyCrash(it1) }
-                    val workerUser = Workers(
-                        dni = dni,
-                        name = name,
-                        lastname = lastname,
-                        date_birth = dateBirth,
-                        date_join = dateJoin,
-                        area = area,
-                        blood_type = bloodType,
-                        diseases = diseases,
-                        allergies = allergies,
-                        phone = phone,
-                        phone_emergency = phoneEmergency,
-                        photo = imageBase
-                    )
+               imageFile?.let {
+                   val imageBase = imageFile?.toUri()?.let { it1 -> getBase64ForUriAndPossiblyCrash(it1) }
+                   val workerUser = Workers(
+                       dni = dni,
+                       name = name,
+                       lastname = lastname,
+                       date_birth = dateBirth,
+                       date_join = dateJoin,
+                       area = area,
+                       blood_type = bloodType,
+                       diseases = diseases,
+                       allergies = allergies,
+                       phone = phone,
+                       phone_emergency = phoneEmergency,
+                       photo = imageBase,
+                       photoFormat = imageFile?.name
+                   )
 
-                    CoroutineScope(Dispatchers.Default).launch {
-                        postWorkersProvider.postWorkers(workerUser)?.enqueue(object : Callback<ResponseHttp> {
-                            override fun onResponse(call: Call<ResponseHttp>, response: Response<ResponseHttp>) {
-                                if (response.body()?.code == 200) {
-                                    hideLoading()
-                                    runBlocking {
-                                        deleteCache(this@CreateWorkerActivity)
-                                    }
-                                    clearForm()
-                                    SweetAlertDialog(this@CreateWorkerActivity, SweetAlertDialog.SUCCESS_TYPE)
-                                        .setTitleText(getString(R.string.title_200_register_worker))
-                                        .show()
-                                } else {
-                                    hideLoading()
-                                    SweetAlertDialog(this@CreateWorkerActivity, SweetAlertDialog.ERROR_TYPE)
-                                        .setTitleText(getString(R.string.title_error_register))
-                                        .show()
-                                }
-                            }
+                   CoroutineScope(Dispatchers.Default).launch {
+                       postWorkersProvider.postWorkers(workerUser)?.enqueue(object : Callback<ResponseHttp> {
+                           override fun onResponse(call: Call<ResponseHttp>, response: Response<ResponseHttp>) {
+                               if (response.body()?.code == 200) {
+                                   hideLoading()
+                                   runBlocking {
+                                       deleteCache(this@CreateWorkerActivity)
+                                   }
+                                   clearForm()
+                                   SweetAlertDialog(this@CreateWorkerActivity, SweetAlertDialog.SUCCESS_TYPE)
+                                       .setTitleText(getString(R.string.title_200_register_worker))
+                                       .show()
+                               } else {
+                                   hideLoading()
+                                   SweetAlertDialog(this@CreateWorkerActivity, SweetAlertDialog.ERROR_TYPE)
+                                       .setTitleText(getString(R.string.title_error_register))
+                                       .show()
+                               }
+                           }
 
-                            override fun onFailure(call: Call<ResponseHttp>, t: Throwable) {
-                                hideLoading()
-                                Toast.makeText(this@CreateWorkerActivity, "Error: ${t.message}", Toast.LENGTH_LONG).show()
-                            }
+                           override fun onFailure(call: Call<ResponseHttp>, t: Throwable) {
+                               hideLoading()
+                               Toast.makeText(this@CreateWorkerActivity, "Error: ${t.message}", Toast.LENGTH_LONG).show()
+                           }
 
-                        })
-                    }
-                } else {
-                    hideLoading()
-                    SweetAlertDialog(this@CreateWorkerActivity, SweetAlertDialog.WARNING_TYPE)
-                        .setTitleText(getString(R.string.title_404_image))
-                        .show()
-                }
+                       })
+                   }
+               } ?: {
+                   hideLoading()
+                   SweetAlertDialog(this@CreateWorkerActivity, SweetAlertDialog.WARNING_TYPE)
+                       .setTitleText(getString(R.string.title_404_image))
+                       .setContentText(getString(R.string.subtitle_image_description))
+                       .show();
+               }
+
+
             }
         } else {
             SweetAlertDialog(this@CreateWorkerActivity, SweetAlertDialog.WARNING_TYPE)
