@@ -9,7 +9,11 @@ class MainUser(
     @SerializedName("action") val action: String? = null,
     @SerializedName("code") val code: Int ? = null,
     @SerializedName("new_password") val new_password: String? = null,
-    @SerializedName("dni") val dni: String? = null
+    @SerializedName("dni") val dni: String? = null,
+    @SerializedName("photo") val photo: String? = null,
+    @SerializedName("create_date_account") val createDateAccount: String? = null,
+    @SerializedName("name") val name: String? = null,
+    @SerializedName("lastname") val lastname: String? = null
 ) {
     fun toJson(): String {
         return Gson().toJson(this)

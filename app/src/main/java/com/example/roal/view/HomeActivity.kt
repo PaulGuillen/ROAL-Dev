@@ -31,7 +31,9 @@ class HomeActivity : AppCompatActivity() {
         }
 
         binding.cardviewPerfil.setOnClickListener {
+            val email = intent.getStringExtra("email")
             val i = Intent(applicationContext, PerfilActivity::class.java)
+            i.putExtra("email", email)
             startActivity(i)
         }
 

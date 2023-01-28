@@ -32,7 +32,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun goToHomeView() {
-
         val email = binding.textEmail.text.toString()
         val password = binding.textPassword.text.toString()
         val action = "login"
@@ -95,7 +94,9 @@ class LoginActivity : AppCompatActivity() {
 
     private fun goToHomeDashboard() {
         val i = Intent(this, HomeActivity::class.java)
+        val email = binding.textEmail.text.toString()
         i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        i.putExtra("email" , email)
         startActivity(i)
     }
 

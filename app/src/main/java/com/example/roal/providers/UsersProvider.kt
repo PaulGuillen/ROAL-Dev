@@ -30,4 +30,8 @@ class UsersProvider {
     fun resetPassword(mainUser: MainUser): Call<ResponseHttp>? {
         return usersRoutes?.resetPassword(mainUser)
     }
+
+    fun getMainData(email: String): Call<MainUser>? {
+        return usersRoutes?.getMainData(email)
+    }
 }
