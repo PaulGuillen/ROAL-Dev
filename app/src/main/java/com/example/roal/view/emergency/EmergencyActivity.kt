@@ -10,7 +10,6 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Base64
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -19,12 +18,8 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
-import com.bumptech.glide.Glide
-import com.bumptech.glide.Priority
-import com.bumptech.glide.request.RequestOptions
 import com.example.roal.R
 import com.example.roal.databinding.ActivityEmergencyBinding
-import com.example.roal.databinding.ActivityPerfilBinding
 import com.example.roal.models.Workers
 import com.example.roal.providers.WorkersProvider
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -138,12 +133,12 @@ class EmergencyActivity : AppCompatActivity() {
 
                     /**Celulares*/
                     val textPrincipalPhone = response.body()?.phone
-                    val textSecondaryPhone = response.body()?.phone_emergency
+                    val textSecondaryPhone = response.body()?.phoneEmergency
 
                     val textArea = response.body()?.area
-                    val textDateBirth = response.body()?.date_birth
-                    val textJoinDate = response.body()?.date_join
-                    val textBloodType = response.body()?.blood_type
+                    val textDateBirth = response.body()?.dateBirth
+                    val textJoinDate = response.body()?.dateJoin
+                    val textBloodType = response.body()?.bloodType
                     val textDiseases = response.body()?.diseases
                     val textAllergies = response.body()?.allergies
 
@@ -169,7 +164,6 @@ class EmergencyActivity : AppCompatActivity() {
             }
         })
     }
-
 
     private fun hideLoading() {
         progressDialog?.let { if (it.isShowing) it.cancel() }
@@ -199,7 +193,6 @@ class EmergencyActivity : AppCompatActivity() {
                     )
                     workersProvider.consultByPhoto(user)?.enqueue(object : Callback<Workers> {
                         override fun onResponse(call: Call<Workers>, response: Response<Workers>) {
-                            Toast.makeText(this@EmergencyActivity, "Se guardo la informacion", Toast.LENGTH_LONG).show()
                             if (response.isSuccessful){
                                 binding.linearDNI.visibility = View.VISIBLE
                                 clearForm()

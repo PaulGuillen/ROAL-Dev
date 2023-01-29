@@ -132,14 +132,14 @@ class CreateWorkerActivity : AppCompatActivity() {
                        dni = dni,
                        name = name,
                        lastname = lastname,
-                       date_birth = dateBirth,
-                       date_join = dateJoin,
+                       dateBirth = dateBirth,
+                       dateJoin = dateJoin,
                        area = area,
-                       blood_type = bloodType,
+                       bloodType = bloodType,
                        diseases = diseases,
                        allergies = allergies,
                        phone = phone,
-                       phone_emergency = phoneEmergency,
+                       phoneEmergency = phoneEmergency,
                        photo = imageBase,
                        photoFormat = imageFile?.name
                    )
