@@ -9,6 +9,7 @@ import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
 import android.util.Base64
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -122,68 +123,70 @@ class CreateWorkerActivity : AppCompatActivity() {
         val allergies = binding.textAllergies.text.toString()
         val phone = binding.textPhone.text.toString()
         val phoneEmergency = binding.textPhoneEmergency.text.toString()
+        val photo = binding.imageViewUser
 
-        if (isValidForm(dni, name, lastname, area, phone, phoneEmergency)) {
-            showLoading()
-            startImageForResult.let {
-               imageFile?.let {
-                   val imageBase = imageFile?.toUri()?.let { it1 -> getBase64ForUriAndPossiblyCrash(it1) }
-                   val workerUser = Workers(
-                       dni = dni,
-                       name = name,
-                       lastname = lastname,
-                       dateBirth = dateBirth,
-                       dateJoin = dateJoin,
-                       area = area,
-                       bloodType = bloodType,
-                       diseases = diseases,
-                       allergies = allergies,
-                       phone = phone,
-                       phoneEmergency = phoneEmergency,
-                       photo = imageBase,
-                       photoFormat = imageFile?.name
-                   )
+        isValidForm(dni, name, lastname, area, phone, phoneEmergency).let {
+            if (photo.drawable.constantState != ContextCompat.getDrawable(this@CreateWorkerActivity,
+                    R.drawable.ic_baseline_image_24)?.constantState) {
+                showLoading()
+                startImageForResult.let {
+                    imageFile?.let {
+                        val imageBase = imageFile?.toUri()?.let { it1 -> getBase64ForUriAndPossiblyCrash(it1) }
+                        val workerUser = Workers(
+                            dni = dni,
+                            name = name,
+                            lastname = lastname,
+                            dateBirth = dateBirth,
+                            dateJoin = dateJoin,
+                            area = area,
+                            bloodType = bloodType,
+                            diseases = diseases,
+                            allergies = allergies,
+                            phone = phone,
+                            phoneEmergency = phoneEmergency,
+                            photo = imageBase,
+                            photoFormat = imageFile?.name
+                        )
+                        CoroutineScope(Dispatchers.Default).launch {
+                            postWorkersProvider.postWorkers(workerUser)?.enqueue(object : Callback<ResponseHttp> {
+                                override fun onResponse(call: Call<ResponseHttp>, response: Response<ResponseHttp>) {
+                                    if (response.body()?.code == 200) {
+                                        hideLoading()
+                                        runBlocking {
+                                            deleteCache(this@CreateWorkerActivity)
+                                        }
+                                        clearForm()
+                                        SweetAlertDialog(this@CreateWorkerActivity, SweetAlertDialog.SUCCESS_TYPE)
+                                            .setTitleText(getString(R.string.title_200_register_worker))
+                                            .show()
+                                    } else {
+                                        hideLoading()
+                                        SweetAlertDialog(this@CreateWorkerActivity, SweetAlertDialog.ERROR_TYPE)
+                                            .setTitleText(getString(R.string.title_error_register))
+                                            .show()
+                                    }
+                                }
 
-                   CoroutineScope(Dispatchers.Default).launch {
-                       postWorkersProvider.postWorkers(workerUser)?.enqueue(object : Callback<ResponseHttp> {
-                           override fun onResponse(call: Call<ResponseHttp>, response: Response<ResponseHttp>) {
-                               if (response.body()?.code == 200) {
-                                   hideLoading()
-                                   runBlocking {
-                                       deleteCache(this@CreateWorkerActivity)
-                                   }
-                                   clearForm()
-                                   SweetAlertDialog(this@CreateWorkerActivity, SweetAlertDialog.SUCCESS_TYPE)
-                                       .setTitleText(getString(R.string.title_200_register_worker))
-                                       .show()
-                               } else {
-                                   hideLoading()
-                                   SweetAlertDialog(this@CreateWorkerActivity, SweetAlertDialog.ERROR_TYPE)
-                                       .setTitleText(getString(R.string.title_error_register))
-                                       .show()
-                               }
-                           }
+                                override fun onFailure(call: Call<ResponseHttp>, t: Throwable) {
+                                    hideLoading()
+                                    Toast.makeText(this@CreateWorkerActivity, "Error: ${t.message}", Toast.LENGTH_LONG).show()
+                                }
 
-                           override fun onFailure(call: Call<ResponseHttp>, t: Throwable) {
-                               hideLoading()
-                               Toast.makeText(this@CreateWorkerActivity, "Error: ${t.message}", Toast.LENGTH_LONG).show()
-                           }
-
-                       })
-                   }
-               } ?: hideLoading()
-                   SweetAlertDialog(this@CreateWorkerActivity, SweetAlertDialog.WARNING_TYPE)
-                       .setTitleText(getString(R.string.title_404_image))
-                       .setContentText(getString(R.string.subtitle_image_description))
-                       .show();
-
+                            })
+                        }
+                    }
+                }
+            } else {
+                SweetAlertDialog(this@CreateWorkerActivity, SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText(getString(R.string.title_404_image))
+                    .setContentText(getString(R.string.subtitle_image_description))
+                    .show();
             }
-        } else {
-            SweetAlertDialog(this@CreateWorkerActivity, SweetAlertDialog.WARNING_TYPE)
-                .setTitleText(getString(R.string.title_missing_parameters))
-                .setContentText(getString(R.string.subtitle_missing_parameters))
-                .show()
-        }
+        } ?:  SweetAlertDialog(this@CreateWorkerActivity, SweetAlertDialog.WARNING_TYPE)
+            .setTitleText(getString(R.string.title_missing_parameters))
+            .setContentText(getString(R.string.subtitle_missing_parameters))
+            .show()
+
     }
 
     private fun clearForm() {
@@ -230,16 +233,19 @@ class CreateWorkerActivity : AppCompatActivity() {
             toggleTextInputLayoutError(binding.textDNI, messageError)
             return false
         }
+
         if (area.isBlank() || area.isEmpty()) {
             val messageError = getString(R.string.mandatory)
             toggleTextInputLayoutError(binding.textArea, messageError)
             return false
         }
+
         if (name.isBlank()) {
             val messageError = getString(R.string.mandatory)
             toggleTextInputLayoutError(binding.textName, messageError)
             return false
         }
+
         if (lastname.isBlank()) {
             val messageError = getString(R.string.mandatory)
             toggleTextInputLayoutError(binding.textLastname, messageError)
@@ -251,11 +257,13 @@ class CreateWorkerActivity : AppCompatActivity() {
             toggleTextInputLayoutError(binding.textPhone, messageError)
             return false
         }
+
         if (phoneEmergency.isBlank() || phoneEmergency.length < 9) {
             val messageError = getString(R.string.mandatory)
             toggleTextInputLayoutError(binding.textPhoneEmergency, messageError)
             return false
         }
+
         return true
     }
 
@@ -278,20 +286,24 @@ class CreateWorkerActivity : AppCompatActivity() {
 
     private val startImageForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-            expectedResult(result)
+            dataResult(result)
         }
 
-    private fun expectedResult(result: ActivityResult) {
+    private fun dataResult(result: ActivityResult) {
         val resultCode = result.resultCode
         val data = result.data
-        if (resultCode == Activity.RESULT_OK) {
-            val fileUri = data?.data
-            imageFile = fileUri?.path?.let { File(it) }
-            binding.imageViewUser.setImageURI(fileUri)
-        } else if (resultCode == ImagePicker.RESULT_ERROR) {
-            Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_LONG).show()
-        } else {
-            Toast.makeText(this, "Tarea se cancelo", Toast.LENGTH_LONG).show()
+        when (resultCode) {
+            Activity.RESULT_OK -> {
+                val fileUri = data?.data
+                imageFile = fileUri?.path?.let { File(it) }
+                binding.imageViewUser.setImageURI(fileUri)
+            }
+            ImagePicker.RESULT_ERROR -> {
+                /**Causistica a contemplar**/
+            }
+            else -> {
+                /**Si se cierra la vista*/
+            }
         }
     }
 

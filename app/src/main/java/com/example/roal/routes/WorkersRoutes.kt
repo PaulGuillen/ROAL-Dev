@@ -27,7 +27,7 @@ interface WorkersRoutes {
         @Path("dni") dni: String
     ):  Call<Workers>
 
-    @POST("prod/consult_photo")
+    @POST("prod/get_data_from_photo")
     fun consultByPhoto(
         @Body workerUser: Workers
     ):  Call<Workers>

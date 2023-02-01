@@ -109,16 +109,16 @@ class EmergencyActivity : AppCompatActivity() {
     private fun searchWorkers() {
         binding.searchBox.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                getWorkers()
+                val dni = binding.searchBox.text.toString()
+                getWorkers(dni)
                 performSearch()
             }
             false
         }
     }
 
-    private fun getWorkers() {
+    private fun getWorkers(dni: String) {
         showLoading()
-        val dni = binding.searchBox.text.toString()
         workersProvider.getWorkers(dni)?.enqueue(object : Callback<Workers> {
             override fun onResponse(call: Call<Workers>, response: Response<Workers>) {
                 if (response.body() != null) {
@@ -196,7 +196,8 @@ class EmergencyActivity : AppCompatActivity() {
                             if (response.isSuccessful){
                                 binding.linearDNI.visibility = View.VISIBLE
                                 clearForm()
-                                Timber.d("Response = ${response.body()}")
+                                val dni = response.body()?.dni.toString()
+                                getWorkers(dni)
                             }else{
                                 binding.linearDNI.visibility = View.GONE
                             }
@@ -226,15 +227,19 @@ class EmergencyActivity : AppCompatActivity() {
     private fun dataResult(result : ActivityResult){
         val resultCode = result.resultCode
         val data = result.data
-        if (resultCode == Activity.RESULT_OK) {
-            val fileUri = data?.data
-            imageFile = fileUri?.path?.let { File(it) }
-            binding.imagePhoto.setImageURI(fileUri)
-            sendImageToBE()
-        } else if (resultCode == ImagePicker.RESULT_ERROR) {
-            Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_LONG).show()
-        } else {
-            Toast.makeText(this, "Tarea se cancelo", Toast.LENGTH_LONG).show()
+        when(resultCode) {
+            Activity.RESULT_OK -> {
+                val fileUri = data?.data
+                imageFile = fileUri?.path?.let { File(it) }
+                binding.imagePhoto.setImageURI(fileUri)
+                sendImageToBE()
+            }
+            ImagePicker.RESULT_ERROR -> {
+                /**Causistica a contemplar**/
+            }
+            else -> {
+                /**Si se cierra la vista*/
+            }
         }
     }
 
