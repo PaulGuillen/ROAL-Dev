@@ -53,7 +53,7 @@
     <string name="datos_opcionales_form">Datos opcionales</string>
     <string name="fecha_de_ingreso_form">Fecha de ingreso</string>
     <string name="alergias_form">Alergias</string>
-    <string name="enfermedades_pre_existentes_form">Enfermedades pre existentes</string>
+    <string name="enfermedades_pre_existentes_form">Enfermedades</string>
     <string name="grupo_sangu_neo_form">Grupo sanguíneo</string>
     <string name="area_form">Área</string>
     <string name="title_200_register_worker">"Registro exitoso"</string>
@@ -72,7 +72,10 @@
     <string name="fecha_de_creaci_n">Fecha de creación</string>
     <string name="password">*************</string>
     <string name="salir">Salir</string>
-    <string name="texto_card_view">Estamos comenzando, pronto oiras sobre nosotros</string>
+    <string name="texto_card_view">Seguirás escuchando sobre nosotros, somos un grupo pequeño de desarolladores,que aun sigue en progreso.</string>
+    <string name="textAlerta">La aplicación aun sigue en mejores, si tienes problemas comunicate con nosotros.</string>
+    <string name="textVerififacion">Se verifica que la aplicación cumple con los Terminos y Condiciones correspondientes.</string>
+    <string name="textSegundaVerificacion">Desarollo por parte de Ingenieros de Siste,as.</string>
     <string name="buscar">Buscar</string>
     <string name="tipos_de_busquedad">Tipos de busquedad</string>
     <string name="foto">Foto</string>
@@ -83,7 +86,9 @@
     <string name="datos_generales">Datos generales</string>
     <string name="celulares">Celulares</string>
     <string name="fechas">Fechas</string>
-    <string name="nacimiento">Nacimiento :</string>
+    <string name="nacimiento">Nacimiento</string>
     <string name="_12_10_1998">12-10-1998</string>
-    <string name="ingreso">Ingreso :</string>
+    <string name="ingreso">Ingreso</string>
+    <string name="A">A+</string>
+    <string name="posible_lista_de_enf">Posible lista</string>
 </resources>

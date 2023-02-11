@@ -86,10 +86,10 @@
                 android:imeOptions="actionSearch"
                 android:inputType="number"
                 android:maxLength="8"
-                android:visibility="gone"
                 android:maxLines="1"
                 android:padding="12dp"
                 android:textSize="14sp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/include"
@@ -99,7 +99,7 @@
                 android:id="@+id/imagePhoto"
                 android:layout_width="match_parent"
                 android:layout_height="310dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="5dp"
                 android:background="@color/gray_light"
                 android:contentDescription="@string/todo"
                 android:src="@drawable/ic_baseline_image_24"
@@ -112,11 +112,11 @@
                 android:id="@+id/imageQR"
                 android:layout_width="match_parent"
                 android:layout_height="310dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="5dp"
                 android:background="@color/gray_light"
                 android:contentDescription="@string/todo"
-                android:src="@drawable/ic_baseline_camera_alt_24"
                 android:visibility="gone"
+                android:src="@drawable/ic_baseline_camera_alt_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/include" />
@@ -137,8 +137,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 app:cardCornerRadius="10dp"
@@ -309,10 +309,18 @@
                             android:textSize="20sp"
                             tools:ignore="RtlSymmetry" />
 
+                        <View
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@color/gray" />
+
                         <TextView
                             android:id="@+id/textBornDate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
                             android:fontFamily="@font/mulish_bold"
                             android:text="@string/_12_10_1998"
                             android:textAlignment="textStart"
@@ -338,10 +346,18 @@
                             android:textSize="20sp"
                             tools:ignore="RtlSymmetry" />
 
+                        <View
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@color/gray" />
+
                         <TextView
                             android:id="@+id/textJoinDate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
                             android:fontFamily="@font/mulish_bold"
                             android:text="@string/_12_10_1998"
                             android:textAlignment="textStart"
@@ -356,53 +372,137 @@
                         android:layout_marginTop="5dp"
                         android:background="@color/gray" />
 
-                    <TextView
-                        android:id="@+id/textArea"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:fontFamily="@font/mulish_bold"
-                        android:paddingEnd="15dp"
-                        android:text="@string/area_form"
-                        android:textAlignment="textStart"
-                        android:textSize="20sp"
-                        tools:ignore="RtlSymmetry" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/textBloodType"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:fontFamily="@font/mulish_bold"
-                        android:paddingEnd="15dp"
-                        android:text="@string/grupo_sangu_neo_form"
-                        android:textAlignment="textStart"
-                        android:textSize="20sp"
-                        tools:ignore="RtlSymmetry" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:fontFamily="@font/mulish_bold"
+                            android:text="@string/area_form"
+                            android:textAlignment="center"
+                            android:textSize="20sp" />
 
-                    <TextView
-                        android:id="@+id/textDiseases"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:fontFamily="@font/mulish_bold"
-                        android:paddingEnd="15dp"
-                        android:text="@string/enfermedades_pre_existentes_form"
-                        android:textAlignment="textStart"
-                        android:textSize="20sp"
-                        tools:ignore="RtlSymmetry" />
+                        <View
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@color/gray" />
 
-                    <TextView
-                        android:id="@+id/textAllergies"
+                        <TextView
+                            android:id="@+id/textArea"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:fontFamily="@font/mulish_bold"
+                            android:text="@string/area_form"
+                            android:textAlignment="textStart"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:fontFamily="@font/mulish_bold"
-                        android:paddingEnd="15dp"
-                        android:text="@string/alergias_form"
-                        android:textAlignment="textStart"
-                        android:textSize="20sp"
-                        tools:ignore="RtlSymmetry" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:fontFamily="@font/mulish_bold"
+                            android:text="@string/alergias_form"
+                            android:textAlignment="center"
+                            android:textSize="20sp" />
+
+                        <View
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@color/gray" />
+
+                        <TextView
+                            android:id="@+id/textAllergies"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:fontFamily="@font/mulish_bold"
+                            android:text="@string/alergias_form"
+                            android:textAlignment="textStart"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:fontFamily="@font/mulish_bold"
+                            android:text="@string/enfermedades_pre_existentes_form"
+                            android:textAlignment="center"
+                            android:textSize="20sp" />
+
+                        <View
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@color/gray" />
+
+                        <TextView
+                            android:id="@+id/textDiseases"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:fontFamily="@font/mulish_bold"
+                            android:text="@string/posible_lista_de_enf"
+                            android:textAlignment="textStart"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:fontFamily="@font/mulish_bold"
+                            android:text="@string/grupo_sangu_neo_form"
+                            android:textAlignment="center"
+                            android:textSize="20sp" />
+
+                        <View
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@color/gray" />
+
+                        <TextView
+                            android:id="@+id/textBloodType"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:fontFamily="@font/mulish_bold"
+                            android:text="@string/A"
+                            android:textAlignment="textStart"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

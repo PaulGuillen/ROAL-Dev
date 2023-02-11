@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import com.example.roal.R
 import com.example.roal.databinding.ActivityPerfilBinding
 import com.example.roal.databinding.ActivitySettingsBinding
+import com.example.roal.utils.toolbarStyle
 
 @SuppressLint("SourceLockedOrientationActivity")
 class SettingsActivity : AppCompatActivity() {
@@ -19,10 +20,7 @@ class SettingsActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        binding.include.toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.black))
-        binding.include.toolbar.setTitleTextAppearance(this, R.style.titulosNavbar)
-        binding.include.toolbar.title = "Ajustes"
+        toolbarStyle(this@SettingsActivity,binding.include.toolbar, "Ajustes")
         setSupportActionBar(binding.include.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }

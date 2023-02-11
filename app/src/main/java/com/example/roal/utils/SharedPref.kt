@@ -1,4 +1,4 @@
-package utils
+package com.example.roal.utils
 
 import android.app.Activity
 import android.content.Context

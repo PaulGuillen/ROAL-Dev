@@ -16,7 +16,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.example.roal.R
 import com.example.roal.databinding.ActivityEmergencyBinding
@@ -29,8 +28,9 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import timber.log.Timber
-import utils.ChargeDialog
+import com.example.roal.utils.ChargeDialog
+import com.example.roal.utils.toolbarStyle
+import com.google.zxing.integration.android.IntentIntegrator
 import java.io.File
 import java.io.IOException
 
@@ -47,10 +47,7 @@ class EmergencyActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         binding = ActivityEmergencyBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        binding.include.toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.black))
-        binding.include.toolbar.setTitleTextAppearance(this, R.style.titulosNavbar)
-        binding.include.toolbar.title = "Emergencia"
+        toolbarStyle(this@EmergencyActivity,binding.include.toolbar, "Emergencia")
         setSupportActionBar(binding.include.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -62,7 +59,30 @@ class EmergencyActivity : AppCompatActivity() {
         binding.btnPhoneSecondary.setOnClickListener { goToCall("phoneSecondary") }
 
         binding.imagePhoto.setOnClickListener { selectImage() }
+        binding.imageQR.setOnClickListener { initScanner() }
 
+    }
+
+    private fun initScanner() {
+        val integrator = IntentIntegrator(this)
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
+        integrator.setPrompt("Porfavor verifica que el QR solo sea el DNI")
+        //integrator.setTorchEnabled(true)
+        integrator.setBeepEnabled(true)
+        integrator.initiateScan()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (result != null) {
+            if (result.contents == null) {
+                Toast.makeText(this, "Cancelado", Toast.LENGTH_LONG).show()
+            } else {
+                getWorkers(result.contents.toString())
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
     }
 
     private fun goToCall(text: String){
@@ -85,14 +105,15 @@ class EmergencyActivity : AppCompatActivity() {
     }
 
     private fun searchingByDNI() {
+        toolbarStyle(this@EmergencyActivity,binding.include.toolbar, "Busquedad por DNI")
         binding.searchBox.visibility = View.VISIBLE
         binding.imagePhoto.visibility = View.GONE
         binding.imageQR.visibility = View.GONE
-        /**Si el DNI existe se muestra*/
         searchWorkers()
     }
 
     private fun searchingByPhoto() {
+        toolbarStyle(this@EmergencyActivity,binding.include.toolbar, "Busquedad por FOTO")
         binding.searchBox.visibility = View.GONE
         binding.imagePhoto.visibility = View.VISIBLE
         binding.imageQR.visibility = View.GONE
@@ -100,6 +121,7 @@ class EmergencyActivity : AppCompatActivity() {
     }
 
     private fun searchingByQR() {
+        toolbarStyle(this@EmergencyActivity,binding.include.toolbar, "Busquedad por QR")
         binding.searchBox.visibility = View.GONE
         binding.imagePhoto.visibility = View.GONE
         binding.imageQR.visibility = View.VISIBLE
@@ -181,7 +203,6 @@ class EmergencyActivity : AppCompatActivity() {
         `in`.hideSoftInputFromWindow(binding.searchBox.windowToken, 0)
     }
 
-    /**Searching by PHOTO methods*/
     private fun sendImageToBE() {
         CoroutineScope(Dispatchers.Default).launch {
             startImageForResult.let {
@@ -193,7 +214,7 @@ class EmergencyActivity : AppCompatActivity() {
                     )
                     workersProvider.consultByPhoto(user)?.enqueue(object : Callback<Workers> {
                         override fun onResponse(call: Call<Workers>, response: Response<Workers>) {
-                            if (response.isSuccessful){
+                            if (response.code() == 200){
                                 binding.linearDNI.visibility = View.VISIBLE
                                 clearForm()
                                 val dni = response.body()?.dni.toString()
