@@ -65,7 +65,7 @@ class ManagementWorkerActivity : AppCompatActivity() {
         workersProvider.deleteWorker(actualIdentification)?.enqueue(object : Callback<Workers> {
             override fun onResponse(call: Call<Workers>, response: Response<Workers>) {
                 hideLoading()
-                binding.textNoData.visibility = View.VISIBLE
+                binding.textDataNeed.visibility = View.VISIBLE
                 binding.cardViewWorker.visibility = View.GONE
                 SweetAlertDialog(this@ManagementWorkerActivity, SweetAlertDialog.SUCCESS_TYPE)
                     .setTitleText(getString(R.string.successful_delete_data)).show()
@@ -89,18 +89,6 @@ class ManagementWorkerActivity : AppCompatActivity() {
         }
     }
 
-    private fun goToWorkerCreate() {
-        val i = Intent(this, CreateWorkerActivity::class.java)
-        startActivity(i)
-    }
-
-    private fun goToUpdateWorkers() {
-        val actualIdentification = binding.textViewDNI.text.toString()
-        val i = Intent(this, UpdateWorkerActivity::class.java)
-        i.putExtra("dni",actualIdentification)
-        startActivity(i)
-    }
-
     private fun getWorkers() {
         showLoading()
         val dni = binding.searchBox.text.toString()
@@ -108,7 +96,7 @@ class ManagementWorkerActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Workers>, response: Response<Workers>) {
                 if (response.body() != null) {
                     hideLoading()
-                    binding.textNoData.visibility = View.GONE
+                    binding.textDataNeed.visibility = View.GONE
                     binding.cardViewWorker.visibility = View.VISIBLE
                     val textIdentification = response.body()?.dni
                     val textName = response.body()?.name
@@ -140,7 +128,8 @@ class ManagementWorkerActivity : AppCompatActivity() {
                     resetStatus()
                 } else {
                     hideLoading()
-                    Toast.makeText(this@ManagementWorkerActivity, "No data", Toast.LENGTH_LONG).show()
+                    binding.cardViewWorker.visibility = View.GONE
+                    binding.linearLayoutNoDataFound.visibility = View.VISIBLE
                 }
             }
 
@@ -149,6 +138,18 @@ class ManagementWorkerActivity : AppCompatActivity() {
                 Toast.makeText(this@ManagementWorkerActivity, "Error: ${t.message}", Toast.LENGTH_LONG).show()
             }
         })
+    }
+
+    private fun goToWorkerCreate() {
+        val i = Intent(this, CreateWorkerActivity::class.java)
+        startActivity(i)
+    }
+
+    private fun goToUpdateWorkers() {
+        val actualIdentification = binding.textViewDNI.text.toString()
+        val i = Intent(this, UpdateWorkerActivity::class.java)
+        i.putExtra("dni",actualIdentification)
+        startActivity(i)
     }
 
     private fun hideLoading() {

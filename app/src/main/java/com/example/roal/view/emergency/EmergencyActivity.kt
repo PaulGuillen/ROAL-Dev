@@ -78,6 +78,7 @@ class EmergencyActivity : AppCompatActivity() {
             if (result.contents == null) {
                 Toast.makeText(this, "Cancelado", Toast.LENGTH_LONG).show()
             } else {
+                showLoading()
                 getWorkers(result.contents.toString())
             }
         } else {
@@ -107,6 +108,7 @@ class EmergencyActivity : AppCompatActivity() {
     private fun searchingByDNI() {
         toolbarStyle(this@EmergencyActivity,binding.include.toolbar, "Busquedad por DNI")
         binding.searchBox.visibility = View.VISIBLE
+        binding.linearLayoutNoDataFound.visibility = View.GONE
         binding.imagePhoto.visibility = View.GONE
         binding.imageQR.visibility = View.GONE
         searchWorkers()
@@ -116,6 +118,7 @@ class EmergencyActivity : AppCompatActivity() {
         toolbarStyle(this@EmergencyActivity,binding.include.toolbar, "Busquedad por FOTO")
         binding.searchBox.visibility = View.GONE
         binding.imagePhoto.visibility = View.VISIBLE
+        binding.linearLayoutNoDataFound.visibility = View.GONE
         binding.imageQR.visibility = View.GONE
         binding.linearDNI.visibility = View.GONE
     }
@@ -124,6 +127,7 @@ class EmergencyActivity : AppCompatActivity() {
         toolbarStyle(this@EmergencyActivity,binding.include.toolbar, "Busquedad por QR")
         binding.searchBox.visibility = View.GONE
         binding.imagePhoto.visibility = View.GONE
+        binding.linearLayoutNoDataFound.visibility = View.GONE
         binding.imageQR.visibility = View.VISIBLE
         binding.linearDNI.visibility = View.GONE
     }
@@ -132,6 +136,7 @@ class EmergencyActivity : AppCompatActivity() {
         binding.searchBox.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 val dni = binding.searchBox.text.toString()
+                showLoading()
                 getWorkers(dni)
                 performSearch()
             }
@@ -140,12 +145,12 @@ class EmergencyActivity : AppCompatActivity() {
     }
 
     private fun getWorkers(dni: String) {
-        showLoading()
         workersProvider.getWorkers(dni)?.enqueue(object : Callback<Workers> {
             override fun onResponse(call: Call<Workers>, response: Response<Workers>) {
                 if (response.body() != null) {
                     hideLoading()
                     binding.linearDNI.visibility = View.VISIBLE
+                    binding.linearLayoutNoDataFound.visibility = View.GONE
 
                     /**Data base*/
                     val textIdentification = response.body()?.dni
@@ -164,6 +169,22 @@ class EmergencyActivity : AppCompatActivity() {
                     val textDiseases = response.body()?.diseases
                     val textAllergies = response.body()?.allergies
 
+                    if (textAllergies.isNullOrEmpty()){
+                        binding.textAllergies.text = "No alergías"
+                    } else {
+                        binding.textAllergies.text = textAllergies
+                    }
+                    if (textDiseases.isNullOrEmpty()){
+                        binding.textDiseases.text = "No enfermedades"
+                    }else{
+                        binding.textDiseases.text = textDiseases
+                    }
+                    if (textBloodType.isNullOrEmpty()){
+                        binding.textBloodType.text = "No grupo"
+                    }else{
+                        binding.textBloodType.text = textBloodType
+                    }
+
                     binding.textDNI.text = textIdentification
                     binding.textFullName.text = textFullName
                     binding.textArea.text = textArea
@@ -171,12 +192,12 @@ class EmergencyActivity : AppCompatActivity() {
                     binding.textJoinDate.text = textJoinDate
                     binding.textPrincipal.text = textPrincipalPhone
                     binding.textSecondary.text = textSecondaryPhone
-                    binding.textBloodType.text = textBloodType
-                    binding.textDiseases.text = textDiseases
-                    binding.textAllergies.text = textAllergies
+
                 } else {
                     hideLoading()
-                    Toast.makeText(this@EmergencyActivity, "No data", Toast.LENGTH_LONG).show()
+                    binding.linearDNI.visibility = View.GONE
+                    binding.linearLayoutNoDataFound.visibility = View.VISIBLE
+                    clearForm()
                 }
             }
 
@@ -185,6 +206,42 @@ class EmergencyActivity : AppCompatActivity() {
                 Toast.makeText(this@EmergencyActivity, "Error: ${t.message}", Toast.LENGTH_LONG).show()
             }
         })
+    }
+
+    private fun sendImageToBE() {
+        CoroutineScope(Dispatchers.Default).launch {
+            startImageForResult.let {
+                imageFile?.let {
+                    val imageInBase64 = getBase64ForUriAndPossiblyCrash(it.toUri())
+                    val user = Workers(
+                        photo = imageInBase64,
+                        photoFormat = imageFile?.name
+                    )
+                    workersProvider.consultByPhoto(user)?.enqueue(object : Callback<Workers> {
+                        override fun onResponse(call: Call<Workers>, response: Response<Workers>) {
+                            if (response.code() == 200){
+                                hideLoading()
+                                binding.linearDNI.visibility = View.VISIBLE
+                                val dni = response.body()?.dni.toString()
+                                getWorkers(dni)
+                            }else{
+                                hideLoading()
+                                binding.linearDNI.visibility = View.GONE
+                                binding.linearLayoutNoDataFound.visibility = View.VISIBLE
+                                clearForm()
+                            }
+                            deleteCache(this@EmergencyActivity)
+                        }
+
+                        override fun onFailure(call: Call<Workers>, t: Throwable) {
+                            hideLoading()
+                            binding.linearDNI.visibility = View.GONE
+                            Toast.makeText(this@EmergencyActivity, "No se pudo guardar el dato", Toast.LENGTH_LONG).show()
+                        }
+                    })
+                }
+            }
+        }
     }
 
     private fun hideLoading() {
@@ -201,37 +258,6 @@ class EmergencyActivity : AppCompatActivity() {
         val `in`: InputMethodManager = applicationContext.getSystemService(Context.INPUT_METHOD_SERVICE)
                 as InputMethodManager
         `in`.hideSoftInputFromWindow(binding.searchBox.windowToken, 0)
-    }
-
-    private fun sendImageToBE() {
-        CoroutineScope(Dispatchers.Default).launch {
-            startImageForResult.let {
-                imageFile?.let {
-                    val imageInBase64 = getBase64ForUriAndPossiblyCrash(it.toUri())
-                    val user = Workers(
-                        photo = imageInBase64,
-                        photoFormat = imageFile?.name
-                    )
-                    workersProvider.consultByPhoto(user)?.enqueue(object : Callback<Workers> {
-                        override fun onResponse(call: Call<Workers>, response: Response<Workers>) {
-                            if (response.code() == 200){
-                                binding.linearDNI.visibility = View.VISIBLE
-                                val dni = response.body()?.dni.toString()
-                                getWorkers(dni)
-                            }else{
-                                binding.linearDNI.visibility = View.GONE
-                            }
-                            deleteCache(this@EmergencyActivity)
-                        }
-
-                        override fun onFailure(call: Call<Workers>, t: Throwable) {
-                            binding.linearDNI.visibility = View.GONE
-                            Toast.makeText(this@EmergencyActivity, "No se pudo guardar el dato", Toast.LENGTH_LONG).show()
-                        }
-                    })
-                }
-            }
-        }
     }
 
     private fun clearForm() {
@@ -252,9 +278,11 @@ class EmergencyActivity : AppCompatActivity() {
                 val fileUri = data?.data
                 imageFile = fileUri?.path?.let { File(it) }
                 binding.imagePhoto.setImageURI(fileUri)
+                showLoading()
                 sendImageToBE()
             }
             ImagePicker.RESULT_ERROR -> {
+                hideLoading()
                 /**Causistica a contemplar**/
             }
             else -> {

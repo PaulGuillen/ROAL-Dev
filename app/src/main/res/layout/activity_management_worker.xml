@@ -232,13 +232,13 @@
                         android:layout_height="wrap_content">
 
                         <LinearLayout
-                            android:id="@+id/btnUpdate"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:orientation="vertical"
                             android:layout_height="wrap_content">
 
                             <ImageButton
+                                android:id="@+id/btnUpdate"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -262,13 +262,13 @@
                             android:background="@color/gray" />
 
                         <LinearLayout
-                            android:id="@+id/btnDelete"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:orientation="vertical"
                             android:layout_height="wrap_content">
 
                             <ImageButton
+                                android:id="@+id/btnDelete"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -293,7 +293,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/textNoData"
+                android:id="@+id/textDataNeed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -301,6 +301,30 @@
                 android:textAlignment="center"
                 android:textAppearance="@style/subtitulosGeneral"
                 app:drawableTopCompat="@drawable/image_no_data" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutNoDataFound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="40dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/fabWorkerCreate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchBox">
+
+            <TextView
+                android:id="@+id/textDataNotFoundInManagment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/informacion_respuesta_no_encontrada"
+                android:textAlignment="center"
+                android:textAppearance="@style/subtitulosGeneral"
+                app:drawableTopCompat="@drawable/data_not_found_emergency" />
 
         </LinearLayout>
 

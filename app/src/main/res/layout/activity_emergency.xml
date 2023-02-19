@@ -97,29 +97,53 @@
 
             <ImageView
                 android:id="@+id/imagePhoto"
-                android:layout_width="match_parent"
-                android:layout_height="310dp"
+                android:layout_width="250dp"
+                android:layout_height="210dp"
                 android:layout_marginTop="5dp"
+                android:visibility="gone"
                 android:background="@color/gray_light"
                 android:contentDescription="@string/todo"
                 android:src="@drawable/ic_baseline_image_24"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/include" />
 
             <ImageView
                 android:id="@+id/imageQR"
-                android:layout_width="match_parent"
-                android:layout_height="310dp"
+                android:layout_width="250dp"
+                android:layout_height="210dp"
                 android:layout_marginTop="5dp"
                 android:background="@color/gray_light"
                 android:contentDescription="@string/todo"
-                android:visibility="gone"
                 android:src="@drawable/ic_baseline_camera_alt_24"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/include" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutNoDataFound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="40dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/tvBottomFilter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearButtons">
+
+            <TextView
+                android:id="@+id/textNoData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/informacion_respuesta_no_encontrada"
+                android:textAlignment="center"
+                android:textAppearance="@style/subtitulosGeneral"
+                app:drawableTopCompat="@drawable/data_not_found_emergency" />
 
         </LinearLayout>
 
