@@ -91,4 +91,6 @@
     <string name="ingreso">Ingreso</string>
     <string name="A">A+</string>
     <string name="posible_lista_de_enf">Posible lista</string>
+    <string name="btnBorrar">Borrar</string>
+    <string name="btnActualizar">Actualizar</string>
 </resources>

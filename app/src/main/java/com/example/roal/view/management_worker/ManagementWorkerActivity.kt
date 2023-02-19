@@ -23,6 +23,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import com.example.roal.utils.ChargeDialog
+import com.example.roal.utils.toolbarStyle
 
 @SuppressLint("SourceLockedOrientationActivity")
 class ManagementWorkerActivity : AppCompatActivity() {
@@ -36,14 +37,13 @@ class ManagementWorkerActivity : AppCompatActivity() {
         binding = ActivityManagementWorkerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.include.toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.black))
-        binding.include.toolbar.setTitleTextAppearance(this, R.style.titulosNavbar)
-        binding.include.toolbar.title = "Mantenimiento de trabajadores"
+        toolbarStyle(this@ManagementWorkerActivity,binding.include.toolbar,"Mantenimiento de Trabajadores")
         setSupportActionBar(binding.include.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.fabWorkerCreate.setOnClickListener { goToWorkerCreate() }
         binding.btnDelete.setOnClickListener { deleteWorker() }
+        binding.btnUpdate.setOnClickListener { goToUpdateWorkers() }
         searchWorkers()
     }
 
@@ -60,7 +60,6 @@ class ManagementWorkerActivity : AppCompatActivity() {
     }
 
     private fun deleteWorkers() {
-
         val actualIdentification = binding.textViewDNI.text.toString()
         showLoading()
         workersProvider.deleteWorker(actualIdentification)?.enqueue(object : Callback<Workers> {
@@ -92,6 +91,13 @@ class ManagementWorkerActivity : AppCompatActivity() {
 
     private fun goToWorkerCreate() {
         val i = Intent(this, CreateWorkerActivity::class.java)
+        startActivity(i)
+    }
+
+    private fun goToUpdateWorkers() {
+        val actualIdentification = binding.textViewDNI.text.toString()
+        val i = Intent(this, UpdateWorkerActivity::class.java)
+        i.putExtra("dni",actualIdentification)
         startActivity(i)
     }
 

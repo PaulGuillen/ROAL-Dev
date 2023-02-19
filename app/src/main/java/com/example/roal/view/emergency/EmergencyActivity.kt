@@ -216,7 +216,6 @@ class EmergencyActivity : AppCompatActivity() {
                         override fun onResponse(call: Call<Workers>, response: Response<Workers>) {
                             if (response.code() == 200){
                                 binding.linearDNI.visibility = View.VISIBLE
-                                clearForm()
                                 val dni = response.body()?.dni.toString()
                                 getWorkers(dni)
                             }else{
