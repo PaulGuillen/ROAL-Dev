@@ -97,6 +97,7 @@ class ManagementWorkerActivity : AppCompatActivity() {
                 if (response.body() != null) {
                     hideLoading()
                     binding.textDataNeed.visibility = View.GONE
+                    binding.linearLayoutNoDataFound.visibility = View.GONE
                     binding.cardViewWorker.visibility = View.VISIBLE
                     val textIdentification = response.body()?.dni
                     val textName = response.body()?.name
@@ -129,6 +130,7 @@ class ManagementWorkerActivity : AppCompatActivity() {
                 } else {
                     hideLoading()
                     binding.cardViewWorker.visibility = View.GONE
+                    binding.textDataNeed.visibility = View.GONE
                     binding.linearLayoutNoDataFound.visibility = View.VISIBLE
                 }
             }
